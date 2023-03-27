@@ -1,0 +1,16 @@
+{
+  "files": {
+    "main.css": "/static/css/main.b12fb4d0.css",
+    "main.js": "/static/js/main.429cf45f.js",
+    "static/media/group-portrait-adorable-puppies2.jpg": "/static/media/group-portrait-adorable-puppies2.3a7aca53fbd65f89b773.jpg",
+    "static/media/logo2.png": "/static/media/logo2.8bbb341c2e401eb3d204.png",
+    "static/media/logo3.png": "/static/media/logo3.8bbb341c2e401eb3d204.png",
+    "index.html": "/index.html",
+    "main.b12fb4d0.css.map": "/static/css/main.b12fb4d0.css.map",
+    "main.429cf45f.js.map": "/static/js/main.429cf45f.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.b12fb4d0.css",
+    "static/js/main.429cf45f.js"
+  ]
+}

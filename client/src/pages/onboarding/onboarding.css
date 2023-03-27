@@ -1,0 +1,254 @@
+.onboarding form {
+  display: flex;
+  justify-content: space-around;
+  align-items: flex-start;
+  flex-wrap: wrap;
+}
+
+@media (width > 1250px) {
+  .onboarding form {
+    justify-content: center;
+  }
+}
+
+.onboarding form section {
+  display: flex;
+  flex-direction: column;
+  padding: 0 2%;
+  min-width: 30%;
+  max-width: 35%;
+  text-align: start;
+  flex-wrap: wrap;
+}
+
+.onboarding form input,
+.onboarding form .url-label {
+  padding: 15px 20px;
+  margin: 10px 0;
+  font-size: 14px;
+  border: solid 2px rgb(219, 219, 219);
+  border-radius: 10px;
+}
+
+
+
+.onboarding form .url-label {
+  min-width: fit-content;
+  width: 100%;
+  color: rgb(255, 255, 255);
+  font-weight: bolder;
+  background-color: #68a7ad;
+  border: none;
+  transition: 0.3s ease;
+}
+
+.onboarding form .url-label:hover {
+  cursor: pointer;
+  background-color: #99c4c8;
+  transition: 0.3s ease;
+}
+
+.onboarding form input::-webkit-inner-spin-button,
+.onboarding form input::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin-top: 0;
+}
+
+.onboarding form label {
+  margin: 10px 0;
+}
+
+.onboarding form .multiple-input-container {
+  display: flex;
+}
+
+.multiple-input-container-divider{
+  margin: 20px 0;
+
+}
+
+.onboarding form .multiple-input-container input {
+  margin-right: 10px;
+}
+
+.onboarding form input[type="radio"],
+.url-input {
+  display: none;
+}
+
+.onboarding form input[type="checkbox"] {
+  display: none;
+}
+.onboarding form .multiple-input-container label {
+  font-size: 14px;
+  min-width: fit-content;
+  padding: 12px 10px;
+  margin-right: 8px;
+  border: solid 2px rgb(219, 219, 219);
+  margin-right: 10px;
+  transition: all 0.3s;
+  border-radius: 10px;
+  color: rgb(112, 112, 112);
+}
+
+.onboarding form input[type="radio"]:checked + label {
+  color: rgb(255, 255, 255);
+  font-weight: bolder;
+  background-color: #68a7ad;
+  border: none;
+  transition: 0.3s ease;
+}
+.onboarding form input[type="checkbox"]:checked + label {
+  color: rgb(255, 255, 255);
+  font-weight: bolder;
+  background-color: #68a7ad;
+  border: none;
+  transition: 0.3s ease;
+}
+
+.onboarding form input[type="radio"]:hover + label,
+.onboarding form input[type="checkbox"]:hover + label {
+  cursor: pointer;
+  background-color: #99c4c8;
+  transition: 0.15s ease;
+  color: white;
+  font-weight: bold;
+  border: solid 2px #99c4c8;
+}
+
+.onboarding form input[type="submit"]:hover {
+  cursor: pointer;
+  background-color: rgb(193, 193, 193);
+  color: white;
+  border: solid 2px rgb(193, 193, 193);
+}
+
+.onboarding form input[type="submit"]:active {
+  background-color: rgb(226, 115, 115);
+}
+
+.onboarding form input[type="number"] {
+  width: 33%;
+}
+
+.photo-container {
+  width: 350px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  margin: 15px 0px;
+}
+
+.onboarding-profile-img {
+  width: 300px;
+  max-height: 200px;
+  object-fit: contain;
+  border-radius: 5px;
+}
+
+.profile-img-secondary {
+  min-width: 80px;
+  max-width: 80px;
+  max-height: 80px;
+  min-height: 80px;
+  object-fit: cover;
+  border-radius: 5px;
+}
+
+.secondary-images-div {
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+  width: 650px;
+  max-width: 100%;
+  gap: 10px;
+  margin-top: 20px;
+  flex-wrap: wrap;
+}
+
+.onboarding-loading {
+  height: 80vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.onboarding-go-back {
+  position: absolute;
+  top: 2%;
+  left: 5%;
+  font-size: 14px;
+  font-weight: bold;
+  color: gray;
+}
+
+.onboarding-go-back:hover {
+  cursor: pointer;
+}
+
+.onboarding-hr-title{
+  background-color: #68a7ad;
+  height: 4px;
+  border: 0;
+  width: 12%;
+  margin-top: -10px;
+  margin-bottom: 3%;
+}
+
+.onboarding-title{
+  margin-top: 5%;
+ }
+
+ .onboarding form input[type="text"]:focus {
+  border: #68a7ad solid 2px;
+}
+
+
+@media (max-width: 765px) {
+  .onboarding form {
+    padding-left: 7%;
+    flex-direction: column;
+    padding-bottom: 200px;
+  }
+
+  .onboarding form section {
+    max-width: 90%;
+  }
+
+  .onboarding-profile-img {
+    width: 240px;
+    max-height: 150px;
+  }
+
+  .onboarding form input,
+  .onboarding form .url-label {
+    padding: 8px 10px;
+  }
+
+  .onboarding form .multiple-input-container label {
+    padding: 8px 10px;
+    margin-right: 4px;
+  }
+
+  .onboarding-go-back {
+    top: 1%;
+    left: 75%;
+    min-width: fit-content;
+  }
+
+  .onboarding form .main-input-container {
+    flex-direction: column;
+  }
+
+  .onboarding form .url-label {
+    width: fit-content;
+  }
+  .onboarding-address-section{
+    margin-top: -10px;
+  }
+  .onboarding-title{
+   margin-top: 12%;
+    font-size: 24px;
+  }
+}

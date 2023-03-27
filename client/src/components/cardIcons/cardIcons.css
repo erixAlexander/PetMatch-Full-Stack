@@ -1,0 +1,70 @@
+.icons {
+  display: flex;
+  width: 30vw;
+  min-width: 450px;
+  justify-content: space-evenly;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.circle {
+  box-shadow: 0px 0px 7px 0px rgba(0, 0, 0, 0.1);
+  box-shadow: -5px 0px 7px 0px rgba(0, 0, 0, 0.1);
+  color: rgb(80, 80, 248);
+  padding: 22px;
+  border-radius: 50%;
+  background-color: rgb(255, 255, 255);
+  font-size: 24px;
+}
+
+.circle:hover {
+  color: rgb(26, 26, 116);
+  transition: 0.3s;
+  font-size: 28px;
+  cursor: pointer;
+}
+
+.small-icons {
+  padding: 0;
+  margin: 0;
+  margin-bottom: 2%;
+  display: flex;
+  width: 100vw;
+  justify-content: space-evenly;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.small-circle-icons {
+  box-shadow: 0px 0px 7px 0px rgba(0, 0, 0, 0.1);
+  box-shadow: -5px 0px 7px 0px rgba(0, 0, 0, 0.1);
+  color: rgb(80, 80, 248);
+  padding: 10px;
+  border-radius: 50%;
+  background-color: rgb(255, 255, 255);
+  font-size: 16px;
+}
+
+.x {
+  color: rgb(210, 2, 2);
+  font-weight: bolder;
+  padding-right: 28px;
+  padding-left: 28px;
+}
+
+.heart {
+  color: rgb(98, 201, 136);
+}
+
+.dog {
+  color: rgb(65, 227, 249);
+}
+
+
+
+.small-x {
+  color: rgb(210, 2, 2);
+  font-weight: bolder;
+  padding-right: 14px;
+  padding-left: 12px;
+}

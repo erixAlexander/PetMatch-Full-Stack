@@ -1,0 +1,213 @@
+/* ----------------------ChatList------------------------- */
+
+.small-chatList-main-container {
+  position: relative;
+  width: 90%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-start;
+  overflow-y: scroll;
+}
+.small-chat-title {
+  color: white;
+  font-size: 18px;
+}
+.small-matchesList {
+  min-height: 15vh;
+  max-height: 20vh;
+}
+.small-chat-secondary-container {
+  margin-top: 5px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: start;
+  width: 100%;
+  gap: 5px;
+}
+
+.small-chat-preview,
+.small-chat-preview-text {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 15px;
+  width: 100%;
+}
+
+.small-chat-preview {
+  position: relative;
+}
+.preview-message {
+  display: flex;
+  width: 80%;
+  max-width: 80%;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+  gap: 0;
+}
+
+.small-chat-preview-text {
+  gap: 0px;
+}
+
+.preview-img {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  border: solid white 1px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.icon-mail-cell {
+  position: absolute;
+  right: 5%;
+  width: 15px;
+  height: 15px;
+  background-color: purple;
+  border-radius: 50%;
+}
+
+/* ----------------------MatchesDisplay------------------------- */
+
+.matchesList-main-container {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  justify-content: start;
+  overflow-x: scroll;
+}
+
+.matches-info-containter {
+  width: 100%;
+  margin-bottom: 8px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+}
+
+.small-matchesList {
+  width: 100%;
+  height: 100%;
+}
+
+.matchlist-item {
+  position: relative;
+  width: 80px;
+  min-width: 80px;
+  height: 110px;
+  background-color: aquamarine;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: end;
+  font-size: 14px;
+  font-weight: bold;
+  color: white;
+  border-radius: 10px;
+}
+
+.match-image {
+  position: absolute;
+  bottom: 0;
+}
+.match-name {
+  z-index: 2;
+  margin: 0;
+}
+
+.match-overlay {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(10deg, #00000098, #c6c6c620);
+  z-index: 1;
+}
+
+/* ----------------------ChatDisplay------------------------- */
+
+.chatDisplay-main-container {
+  top: 0;
+  width: 90vw;
+  height: 100%;
+  overflow-y: scroll;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.small-chat-pet-name {
+  max-width: 100%;
+  text-align: center;
+  font-size: 14px;
+  margin: 0px;
+  color: white;
+  font-weight: bold;
+}
+
+.back-chat-display {
+  position: absolute;
+  top: 0;
+  margin: 0;
+  right: 3%;
+  color: white;
+  font-size: 20px;
+}
+
+.chat-display-flex {
+  min-width: 90%;
+  max-width: 90%;
+  max-height: 85%;
+}
+
+.chat-display-flex2 {
+  width: 100%;
+  max-height: 15%;
+  min-height: 15%;
+}
+
+.small-chat-input {
+  background-color: rgb(32, 32, 32);
+  min-width: 90%;
+  min-height: 100%;
+  overflow: scroll;
+}
+
+.small-chat-input-form {
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  width: 100%;
+  min-height: 50px;
+  padding-top: 1%;
+}
+
+.small-text-area {
+  margin: 1px 5px;
+  width: 60vw;
+  height: 25px;
+  border: none;
+  border-radius: 10px;
+  font-size: 12px;
+}
+
+.small-secondary-button {
+  font-size: 14px;
+  padding: 6px 10px;
+  font-weight: bold;
+  border-radius: 10px;
+  color: white;
+  background-color: #68a7ad;
+  border: none;
+}

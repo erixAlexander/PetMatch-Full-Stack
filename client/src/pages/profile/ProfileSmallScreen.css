@@ -1,0 +1,124 @@
+.main-small-profile-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  width: 100vw;
+  height: fit-content;
+  min-height: 100vh;
+  background-image: url("https://res.cloudinary.com/dhttotcxc/image/upload/v1657680191/beautiful-pet-portrait-small-dog-cat_2_zhk7ah.jpg");
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-position: 65% bottom;
+  background-color: #16292e;
+}
+
+.secondary-small-profile-container {
+  width: inherit;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+}
+
+.small-profile-overlay {
+  width: 100vw;
+  min-height: 120vh;
+  position: fixed;
+  top: 0;
+  left: 0;
+  background-color: #0000009d;
+}
+
+.small-profile-title {
+  color: white;
+  z-index: 1;
+}
+
+.small-profile-hr-title {
+  background-color: white;
+  height: 2px;
+  border: 0;
+  min-width: 2%;
+  margin-top: -15px;
+  margin-bottom: 25%;
+}
+
+.small-profile-circle {
+  border: #68a7ad Solid 8px;
+  height: 170px;
+  width: 170px;
+  border-radius: 50%;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1;
+}
+
+.small-profile-pet-name-logo {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  color: white;
+  z-index: 1;
+  max-width: 70%;
+}
+.small-profile-pet-name {
+  font-size: 20px;
+  font-weight: bolder;
+  color: white;
+}
+
+.small-profile-icons-container {
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  width: 100%;
+  z-index: 1;
+}
+
+.small-profile-main-icons {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  border: #68a7ad Solid 1px;
+  background-color: #68a7ad;
+  height: 40px;
+  width: 40px;
+  border-radius: 50%;
+  margin-bottom: -10px;
+  color: white;
+}
+
+.middle {
+  margin-top: 20px;
+  padding: 5px;
+}
+
+.small-profile-icons {
+  color: white;
+  font-size: 18px;
+}
+
+.content-slider {
+  flex: 1;
+  z-index: 1;
+  max-height: 20%;
+}
+
+.small-profile-icons-name {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.link-dashboard-icon {
+  position: absolute;
+  top: 3%;
+  left: 1%;
+  z-index: 1;
+}

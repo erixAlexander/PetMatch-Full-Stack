@@ -1,0 +1,159 @@
+.sidebar-icon {
+  font-size: 26px;
+  margin-top: 15px;
+  color: #68A7AD;
+  border: solid 2px #68A7AD;
+  border-radius: 50%;
+  padding: 10px;
+  transition: 300ms ease;
+}
+
+.sidebar-icon:hover {
+  cursor: pointer;
+  transition: 300ms ease;
+  filter: brightness(1.2);
+  font-size: 27px;
+}
+
+.sidebar-pet-name {
+  font-size: 16px;
+  font-weight: bolder;
+  margin: 10px 0px 0px 0px;
+  color: white;
+  border-radius: 5px;
+  background-color: #68A7AD;
+  padding: 0px 10px;
+}
+
+.title-sidebar {
+  margin-bottom: 5px;
+  color: rgb(57, 57, 57);
+}
+
+.hr-sidebar {
+  background-color: #68A7AD;
+  height: 4px;
+  border: 0;
+  width: 12%;
+  margin-top: 0;
+}
+
+.sidebar-activeSidebar-div {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.sidebar-card {
+  height: 500px;
+  background-position: center;
+  display: flex;
+  justify-content: center;
+  object-fit: contain;
+  align-items: center;
+  overflow: hidden;
+  position: relative;
+  margin-bottom: -20%;
+}
+
+
+  
+
+
+.sidebar-card img {
+  position: absolute;
+  top: 0;
+  left: auto;
+  width: 100%;
+  opacity: 0;
+  max-height: 80%;
+  object-fit:contain;
+}
+
+.pet-info-sidebar {
+  width: 100%;
+}
+
+.tags-sidebar {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  width: 100%;
+}
+
+.pet-tag-sidebar {
+  font-size: 14px;
+  font-weight: bolder;
+  background-color: rgba(0, 0, 0, 0.716);
+  padding: 5px 10px;
+  border-radius: 10px;
+  color: white;
+}
+
+.capitalize{
+    text-transform: capitalize;
+}
+
+.arrow-icons-sidebar{
+ margin-top: -7%;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 5%;
+  font-size: 30px;
+  color: #68A7AD;
+}
+
+.arrow-icon-sidebar:hover{
+cursor: pointer;
+color: #99C4C8;
+transition: 0.4s ease;
+}
+
+.sidebar-card .activeSlide {
+  opacity: 1;
+  transform: translateX(0);
+}
+.sidebar-card .lastSlide {
+  transform: translateX(-100%);
+}
+.sidebar-card .nextSlide {
+  transform: translateX(100%);
+}
+
+.sidebar-pedigree-div{
+  position: absolute;
+  top: 2%;
+  left: 5%;
+  outline: #68A7AD;
+}
+
+.sidebar-up-icon{
+  font-size: 16px;
+  transition: 300ms;
+}
+
+.sidebar-up-icon:hover{
+  font-size: 18px;
+  cursor: pointer;
+  filter: brightness(1.4);
+  transition: 300ms;
+
+}
+
+.sidebar-close-icon {
+  position: absolute;
+  top:2%;
+  right: 5%;
+  font-size: 20px;
+
+}
+
+.sidebar-close-icon:hover {
+  cursor: pointer;
+  color: red;
+  font-size: 22px;
+}

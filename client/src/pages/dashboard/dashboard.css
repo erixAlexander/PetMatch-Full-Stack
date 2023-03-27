@@ -1,0 +1,210 @@
+.dashboard {
+  background-color: #e9ebee;
+  display: flex;
+  justify-content: left;
+  align-items: center;
+  max-width: 100%;
+  height: 100vh;
+  margin: 0;
+}
+
+.dashboard .swipe-container {
+  background-color: #e9ebee;
+  display: flex;
+  flex: 3;
+  max-width: 60%;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  height: 100%;
+}
+
+.swipe {
+  position: absolute;
+}
+.vertical-card-container {
+  height: 97%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-around;
+}
+
+.dashboard .card-container {
+  position: relative;
+  width: 400px;
+  height: 650px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+
+
+.dashboard .swipe-info {
+  margin: 0;
+  z-index: 0;
+}
+
+.card {
+  width: 400px;
+  height: 650px;
+  max-height: 80vh;
+  box-shadow: 0px 0px 7px 0px rgba(0, 0, 0, 0.1);
+  box-shadow: -5px 0px 7px 0px rgba(0, 0, 0, 0.1);
+  border-radius: 10px;
+  background-size: cover;
+  background-position: center;
+  display: flex;
+  justify-content: center;
+  object-fit: contain;
+  align-items: center;
+}
+
+.cardContent {
+  width: 100%;
+  height: 100%;
+}
+
+.dashboard-lookingfor-container{
+position: absolute;
+margin: 0;
+padding: 0;
+bottom: 22%;
+left: 0;
+width: 100%;
+}
+
+.pet-name {
+  position: absolute;
+  padding: 10px 10px;
+  margin: 0;
+  bottom: 12%;
+  left: 0;
+  color: white;
+  border-radius: 10px;
+  border-bottom-left-radius: 15px;
+  border-bottom-right-radius: 15px;
+  font-size: 34px;
+  text-transform: capitalize;
+  color: white;
+  display: flex;
+  gap: 10px;
+  transition: 0.3s ease;
+}
+
+.pet-name:hover {
+  cursor: pointer;
+  color: rgb(255, 183, 0);
+  background-color: rgba(255, 255, 255, 0.251);
+  transition: 0.3s ease;
+}
+
+.dashboard-user-name, .dashboard-card-address {
+  position: absolute;
+  padding-left: 10px;
+  margin: 0;
+  bottom: 10%;
+  left: 0;
+  color: white;
+  font-size: 16px;
+  display: flex;
+  gap: 10px;
+}
+
+.dashboard-card-address{
+  bottom: 5%;
+}
+
+
+.gender {
+  position: absolute;
+  bottom: 5%;
+  right: 5%;
+  color: white;
+  font-size: 16px;
+  font-weight: bolder;
+  text-transform: capitalize;
+  background-color: rgba(20, 130, 255, 0.211);
+  text-align: center;
+  display: flex;
+  padding: 1% 3%;
+  border-radius: 8px;
+}
+
+.capitalize {
+  text-transform: capitalize;
+  text-transform: capitalize;
+}
+
+.loading-icon {
+  margin-top: 40vh;
+  margin-left: 45vw;
+}
+
+
+.overlay {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  max-width: 100%;
+  max-height: 100%;
+  background: linear-gradient(180deg, #00000000, #000000);
+  border-radius: 10px;
+}
+
+.overlay:hover {
+  cursor: pointer;
+}
+.background-img {
+  display: flex;
+  align-items: center;
+  justify-content: baseline;
+  max-height: 50%;
+  z-index: -1;
+}
+
+.sidebar-container {
+  background-color: rgb(255, 255, 255);
+  position: fixed;
+  min-height: 100vh;
+  height: 100vh;
+  width: 0px;
+  top: 0;
+  right: 0;
+  box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.033);
+  box-shadow: -3px 0px 5px 0px rgba(0, 0, 0, 0.033);
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  word-break: break-all;
+  transition: 0.4s;
+}
+
+.active {
+  width: 600px;
+  max-width: 60%;
+  max-width: 60%;
+  align-items: center;
+  justify-content: center;
+  transition: 0.3s;
+  padding: 0px;
+  overflow-y: scroll;
+  flex-wrap: nowrap;
+}
+
+.dashboard-pedigree-div {
+  position: absolute;
+  top: 0;
+  left: 5%;
+}
+
+.extra-margin{
+  margin-bottom: 10%;
+}
