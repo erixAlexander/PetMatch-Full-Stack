@@ -21,7 +21,7 @@ const app = express();
 
 app.use(express.urlencoded({ extended: false }));
 app.use(credentials);
-app.use(cors(corsOptions));
+app.use(cors());
 app.use(express.json({ limit: "50mb" }));
 app.use(cookieParser());
 
