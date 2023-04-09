@@ -105,7 +105,7 @@ const SearchBox = ({ setFormData, formData, onboarding }) => {
       );
       const success = response.status === 200;
       if (success) {
-        window.location.reload()
+        window.location.reload();
       }
     } catch (error) {
       console.log(error);
@@ -114,7 +114,7 @@ const SearchBox = ({ setFormData, formData, onboarding }) => {
 
   const handleSubmitDistance = async (e) => {
     e.preventDefault();
-    const distance = state.distance  
+    const distance = state.distance;
     const userId = cookies.userId;
     try {
       const response = await axiosPrivate.put(
@@ -126,8 +126,7 @@ const SearchBox = ({ setFormData, formData, onboarding }) => {
       );
       const success = response.status === 200;
       if (success) {
-        window.location.reload()
-
+        window.location.reload();
       }
     } catch (error) {
       console.log(error);
@@ -153,7 +152,7 @@ const SearchBox = ({ setFormData, formData, onboarding }) => {
           )}
           {(showSearchBar || onboarding) && (
             <>
-              <p style={{ marginTop: "3px" }}>Please Select your city</p>
+              <p style={{ margin: "10px 0 10px 0" }}>Please Select your city</p>
               <ReactSearchBox
                 required={true}
                 placeholder="Search for nearby places"
@@ -228,8 +227,8 @@ const SearchBox = ({ setFormData, formData, onboarding }) => {
               <div>
                 <p> Only Show pets in this range</p>
                 <Slider
-                name= "slider"
-                  style={{ color: "#68a7ad" }}
+                  name="slider"
+                  style={{ color: "#fe3072" }}
                   aria-label="Custom marks"
                   defaultValue={40}
                   step={20}
@@ -243,13 +242,12 @@ const SearchBox = ({ setFormData, formData, onboarding }) => {
                         ...prevState,
                         distance: Number(`${e.target.value}`),
                       }));
-                    }else{
+                    } else {
                       setState((prevState) => ({
                         ...prevState,
                         distance: Number(`${e.target.value}`),
                       }));
                     }
-
                   }}
                 />
 

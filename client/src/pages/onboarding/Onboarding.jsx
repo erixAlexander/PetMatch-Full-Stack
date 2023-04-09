@@ -166,6 +166,11 @@ const OnBoarding = () => {
         </div>
       ) : (
         <div className="onboarding">
+          <div className="background"></div>
+          <div className="title">
+              <h1 className="onboarding-title">Create Account</h1>
+              <hr className="onboarding-underline-title" />
+          </div>
           <button
             onClick={() => {
               navigate("/");
@@ -174,8 +179,6 @@ const OnBoarding = () => {
           >
             <ChevronLeftIcon/>goBack
           </button>
-          <h1 className="onboarding-title">Create Account</h1>
-          <hr className="onboarding-underline-title" />
           <form onSubmit={handleSubmit}>
             <section>
               <label htmlFor="first_name">My First Name</label>

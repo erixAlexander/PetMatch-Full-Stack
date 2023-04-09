@@ -1,15 +1,3 @@
-const petList = [
-    "Cat",
-    "Dog",
-    "Goldfish",
-    "Hamster",
-    "Mouse",
-    "Parrot",
-    "Rabbit",
-    "Fish",
-    "Turtle",
-    "Gecko",
-    "Other"
-]
+const petList = ["Cat", "Dog"];
 
-export default petList
+export default petList;
