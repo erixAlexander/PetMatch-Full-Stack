@@ -11,18 +11,14 @@ const mongoose = require("mongoose");
 const connectDB = require("./config/dbConn");
 const verifyJWT = require("./middleware/verifyJWT");
 const credentials = require("./middleware/credentials");
-// const corsOptions = require("./config/corsOptions");
+const corsOptions = require("./config/corsOptions");
 const cookieParser = require("cookie-parser");
 
 // Connect to MongoDB
 connectDB();
 
-var corsOptions = {
-  origin: "https://petmatchlove.netlify.app",
-  optionsSuccessStatus: 200 // some legacy browsers (IE11, various SmartTVs) choke on 204
-}
 const app = express();
-
+console.log('testing' )
 app.use(cors(corsOptions));
 app.use(express.urlencoded({ extended: false }));
 app.use(credentials);
