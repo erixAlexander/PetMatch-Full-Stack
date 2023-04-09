@@ -30,21 +30,19 @@
   border-radius: 10px;
 }
 
-
-
 .onboarding form .url-label {
   min-width: fit-content;
   width: 100%;
   color: rgb(255, 255, 255);
   font-weight: bolder;
-  background-color: #68a7ad;
+  background: #fe3072;
   border: none;
   transition: 0.3s ease;
 }
 
 .onboarding form .url-label:hover {
+  background: #da381f;
   cursor: pointer;
-  background-color: #99c4c8;
   transition: 0.3s ease;
 }
 
@@ -62,9 +60,8 @@
   display: flex;
 }
 
-.multiple-input-container-divider{
+.multiple-input-container-divider {
   margin: 20px 0;
-
 }
 
 .onboarding form .multiple-input-container input {
@@ -109,7 +106,7 @@
 .onboarding form input[type="radio"]:hover + label,
 .onboarding form input[type="checkbox"]:hover + label {
   cursor: pointer;
-  background-color: #99c4c8;
+  background: linear-gradient(45deg, #fe3072, #da381f);
   transition: 0.15s ease;
   color: white;
   font-weight: bold;
@@ -178,17 +175,26 @@
   position: absolute;
   top: 2%;
   left: 5%;
-  font-size: 14px;
-  font-weight: bold;
-  color: gray;
+  color: #fff;
+  font-size: 15px;
+  background: #fe3072;
+  border-radius: 15px;
+  border: none;
+  padding: 25px 40px;
+  transition: 0.6s;
+  display: flex;
+  align-items: center;
+  font-weight: 700;
+  transition: 0.6s;
 }
 
 .onboarding-go-back:hover {
   cursor: pointer;
+  background: #da381f;
 }
 
-.onboarding-hr-title{
-  background-color: #68a7ad;
+.onboarding-underline-title {
+  background: linear-gradient(45deg, #fe3072, #da381f);
   height: 4px;
   border: 0;
   width: 12%;
@@ -196,16 +202,19 @@
   margin-bottom: 3%;
 }
 
-.onboarding-title{
+.onboarding-title {
   margin-top: 5%;
- }
+}
 
- .onboarding form input[type="text"]:focus {
+.onboarding form input[type="text"]:focus {
   border: #68a7ad solid 2px;
 }
 
-
 @media (max-width: 765px) {
+  .onboarding h1 {
+    margin: 15% 0 5% 0;
+  }
+
   .onboarding form {
     padding-left: 7%;
     flex-direction: column;
@@ -232,9 +241,10 @@
   }
 
   .onboarding-go-back {
+    padding: 14px 18px;
+    font-size: 14px;
+    left: 2%;
     top: 1%;
-    left: 75%;
-    min-width: fit-content;
   }
 
   .onboarding form .main-input-container {
@@ -244,11 +254,17 @@
   .onboarding form .url-label {
     width: fit-content;
   }
-  .onboarding-address-section{
+  .onboarding-address-section {
     margin-top: -10px;
   }
-  .onboarding-title{
-   margin-top: 12%;
+  .onboarding-title {
+    margin-top: 12%;
     font-size: 24px;
+  }
+}
+
+@media (max-width: 300px) {
+  .onboarding h1 {
+    margin: 25% 0 5% 0;
   }
 }

@@ -1,14 +1,15 @@
 import { useEffect, useState, useRef } from "react";
 import { useCookies } from "react-cookie";
 import { useNavigate } from "react-router-dom";
-import useAxiosPrivate from "../../hooks/useAxiosPrivate";
 import { faUpload } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import "./onboarding.css";
+import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
+import useAxiosPrivate from "../../hooks/useAxiosPrivate";
 import Dropdown from "../../components/dropdown/Dropdown";
-import petList from "../../utils/petsList";
 import Loading from "../../components/loading/Loading";
 import SearchBox from "../../components/address/SearchBox";
+import petList from "../../utils/petsList";
+import "./onboarding.css";
 
 const OnBoarding = () => {
   let navigate = useNavigate();
@@ -53,12 +54,12 @@ const OnBoarding = () => {
     e.preventDefault();
 
     try {
-      if (!formData.address_info.country) {
-        setLocationError(
-          "You need to select your nearest Location before Submitting"
-        );
-        return;
-      }
+      // if (!formData.address_info.country) {
+      //   setLocationError(
+      //     "You need to select your nearest Location before Submitting"
+      //   );
+      //   return;
+      // }
       setLoading(true);
       setLocationError(false);
       const response = await axiosPrivate.put(
@@ -68,18 +69,19 @@ const OnBoarding = () => {
         }
       );
 
-      const success = response.status == 200;
-      if (success) {
+      if (response.status == 200) {
         navigate("/dashboard");
       }
-    } catch (error) {}
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   const handleChange = (e) => {
-    if (e.target.name === "looking_for") {
+    const name = e.target.name;
+    if (name === "looking_for") {
       const checked = e.target.checked;
       const value = e.target.value;
-      const name = e.target.name;
       setFormData((prevState) => ({
         ...prevState,
         [name]: { ...prevState.looking_for, [value]: checked },
@@ -87,12 +89,12 @@ const OnBoarding = () => {
       return;
     }
     const value =
-      e.target.type === "checkbox" && e.target.name === "pedigree"
+      e.target.name === "pedigree"
         ? e.target.checked
         : e.target.name === "type_of_pet"
         ? e.target.value.toLowerCase()
         : e.target.value;
-    const name = e.target.name;
+
     setFormData((prevState) => ({
       ...prevState,
       [name]: value,
@@ -159,20 +161,21 @@ const OnBoarding = () => {
     <>
       {loading ? (
         <div className="onboarding-loading">
+          <h1>Loading...</h1>
           <Loading type={"bars"} color={"#C6C9CA"} />
         </div>
       ) : (
         <div className="onboarding">
-          <p
+          <button
             onClick={() => {
               navigate("/");
             }}
             className="onboarding-go-back"
           >
-            {"<< Go back"}
-          </p>
+            <ChevronLeftIcon/>goBack
+          </button>
           <h1 className="onboarding-title">Create Account</h1>
-          <hr className="onboarding-hr-title" />
+          <hr className="onboarding-underline-title" />
           <form onSubmit={handleSubmit}>
             <section>
               <label htmlFor="first_name">My First Name</label>

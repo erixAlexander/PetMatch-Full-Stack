@@ -1,50 +1,83 @@
 nav {
-    width: 100%;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.nav-button-container {
+  min-width: 20vw;
+  display: flex;
+  justify-content: space-around;
+  gap: 10px;
+  margin-right: 5%;
+}
+
+nav > button {
+  margin-right: 5%;
+}
+
+nav .logo-container {
+  width: 170px;
+  margin: 15px;
+}
+
+nav .logo-container .logo {
+  width: 50%;
+}
+
+nav .nav-login-button {
+  color: rgb(255, 115, 115);
+  text-transform: uppercase;
+  font-size: 15px;
+  background: white;
+  border-radius: 15px;
+  border: none;
+  padding: 25px 40px;
+  font-weight: 700;
+  transition: 0.6s;
+}
+
+nav .nav-login-button:hover {
+  color: white;
+  background: rgb(255, 0, 0);
+  cursor: pointer;
+}
+
+.nav-signup-button {
+  color: #fff;
+  text-transform: uppercase;
+  font-size: 15px;
+  background: linear-gradient(45deg, #fe3072, #da381f);
+  border-radius: 15px;
+  border: none;
+  padding: 25px 40px;
+  transition: 0.6s;
+  font-weight: 700;
+}
+
+.nav-signup-button:hover {
+  background: linear-gradient(260deg, #fe3072, #ff5940);
+  cursor: pointer;
+  transition: ease-in;
+}
+
+nav .nav-signup-button:disabled,
+nav .nav-login-button:disabled {
+  background: rgb(220, 220, 220);
+  color: black;
+  cursor: default;
+}
+
+@media (max-width: 765px) {
+  nav .nav-login-button,
+  nav .nav-signup-button {
+    font-size: 14px;
+    padding: 15px 18px;
   }
-  
-  nav > button {
-    margin-right: 5%;
-  }
-  
+
   nav .logo-container {
-    width: 170px;
+    width: 100px;
     margin: 15px;
   }
-  
-  nav .logo-container .logo {
-    width: 50%;
-  }
-  
-  nav .nav-button {
-    color: rgb(255, 115, 115);
-    text-transform: uppercase;
-    font-size: 15px;
-    background: white;
-    border-radius: 15px;
-    border: none;
-    padding: 25px 40px;
-    font-weight: bold;
-    transition: 0.6s;
-  }
-  
-  nav .nav-button:hover {
-    color: white;
-    background: rgb(255, 0, 0);
-    cursor: pointer;
-    transition: 0.6s;
-  }
-
-  @media (max-width:765px) {
-    nav .nav-button {
-      font-size: 14px;
-      padding: 15px 25px;
-    }
-
-    nav .logo-container {
-      width: 100px;
-      margin: 15px;
-    }
-  }
+}
