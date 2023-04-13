@@ -261,8 +261,8 @@ const ProfileData = ({
                 <label htmlFor="adopt">A pet to adopt!</label>
               </div>
               <label htmlFor="url" className="url-label">
-                <FontAwesomeIcon icon={faUpload} title="Upload" /> Upload Your
-                Profile Pictures (Maximun 5 files)
+                <FontAwesomeIcon icon={faUpload} title="Upload" />
+                Profile Pictures (Max 5 files)
               </label>
 
               <input

@@ -75,7 +75,9 @@ const AuthModal = ({ setShowModal, isSignUp }) => {
         { withCredentials: true }
       );
 
-      setCookie("userId", response.data.userId);
+      setCookie("userId", response.data.userId, {
+        maxAge: 24 * 60 * 60 * 1000,
+      });
 
       const success = response.status === 201;
       if (success && isSignUp) navigate("/onboarding");
@@ -91,11 +93,7 @@ const AuthModal = ({ setShowModal, isSignUp }) => {
       <div className="close-icon" onClick={handleClose}>
         <FontAwesomeIcon className="x-mark" icon={faXmark} />
       </div>
-      <h2>{isSignUp ? "Create an account" : "Log in"}</h2>
-      <p>
-        Lorem ipsum dolor, sit amet consectetur adipisicing elit. Ipsa
-        similique, aliquam itaque eos minima dolore?
-      </p>
+      <h1>{isSignUp ? "Create an account" : "Log in"}</h1>
       <form
         onSubmit={(e) => {
           handleSubmit(e);
@@ -184,7 +182,7 @@ const AuthModal = ({ setShowModal, isSignUp }) => {
         <p className="password-error">{error}</p>
       </form>
       <hr />
-      <h2 className="authmodal-get-app">GET THE APP</h2>
+      <h4 className="authmodal-get-app">App available soon</h4>
     </div>
   );
 };

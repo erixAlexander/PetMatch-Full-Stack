@@ -3,7 +3,7 @@ import { useCookies } from "react-cookie";
 import { useNavigate } from "react-router-dom";
 import { faUpload } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
+import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
 import useAxiosPrivate from "../../hooks/useAxiosPrivate";
 import Dropdown from "../../components/dropdown/Dropdown";
 import Loading from "../../components/loading/Loading";
@@ -168,8 +168,8 @@ const OnBoarding = () => {
         <div className="onboarding">
           <div className="background"></div>
           <div className="title">
-              <h1 className="onboarding-title">Create Account</h1>
-              <hr className="onboarding-underline-title" />
+            <h1 className="onboarding-title">Create Account</h1>
+            <hr className="onboarding-underline-title" />
           </div>
           <button
             onClick={() => {
@@ -177,7 +177,8 @@ const OnBoarding = () => {
             }}
             className="onboarding-go-back"
           >
-            <ChevronLeftIcon/>goBack
+            <ChevronLeftIcon />
+            goBack
           </button>
           <form onSubmit={handleSubmit}>
             <section>

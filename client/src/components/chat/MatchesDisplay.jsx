@@ -2,21 +2,23 @@ import { useState, useEffect } from "react";
 import Loading from "../loading/Loading";
 import useAxiosPrivate from "../../hooks/useAxiosPrivate";
 import { Image } from "cloudinary-react";
-import "../chat/chat.css";
+import { faEnvelope } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import "../chat/Chat.css";
 
-const MatchesDisplay = ({ clickedUser, setClickedUser, socket, msgEmmited, userId }) => {
+const MatchesDisplay = ({
+  clickedUser,
+  setClickedUser,
+  userId,
+  socketNotification,
+  setSocketNotification,
+}) => {
   const [loading, setLoading] = useState(true);
   const [user, setUser] = useState(null);
   const [mssgRead, setMssgRead] = useState({});
   const [matchedProfiles, setMatchedProfiles] = useState([]);
+  const [notificationArray, setNotificationArray] = useState([]);
   const axiosPrivate = useAxiosPrivate();
-  const [socketUserArray, setSocketUserArray] = useState([]);
-
-  useEffect(() => {
-    socket.current?.on("newMessage", ({ userId, notification }) => {
-      setSocketUserArray((prev) => [...prev, { userId, notification }]);
-    });
-  }, [msgEmmited]);
 
   const getUser = async () => {
     try {
@@ -32,17 +34,18 @@ const MatchesDisplay = ({ clickedUser, setClickedUser, socket, msgEmmited, userI
     }
   };
 
-  const getMatches = async (userLikedUserIds) => {
+  const getMatches = async (likedUserIds) => {
     try {
       const response = await axiosPrivate.get(
         `${process.env.REACT_APP_URL}/users`,
         {
-          params: { userIds: JSON.stringify(userLikedUserIds) },
+          params: { userIds: JSON.stringify(likedUserIds) },
         }
       );
+      const allLikedUsers = response.data;
 
       setMatchedProfiles(
-        response.data?.filter(
+        allLikedUsers.filter(
           (matchedProfile) =>
             matchedProfile.user_matches.filter(
               (profile) => profile.user_id == userId
@@ -62,8 +65,8 @@ const MatchesDisplay = ({ clickedUser, setClickedUser, socket, msgEmmited, userI
   useEffect(() => {
     if (user) {
       const likedUsers = user?.user_matches;
-      const userLikedUserIds = likedUsers?.map(({ user_id }) => user_id);
-      getMatches(userLikedUserIds);
+      const likedUserIds = likedUsers?.map(({ user_id }) => user_id);
+      getMatches(likedUserIds);
     }
   }, [user, clickedUser]);
 
@@ -72,11 +75,18 @@ const MatchesDisplay = ({ clickedUser, setClickedUser, socket, msgEmmited, userI
       setMssgRead((prev) => ({
         ...prev,
         [index]: user?.user_matches?.find(
-          (matchUser) => matchUser.user_id === match.user_id
+          (matchedUser) => matchedUser.user_id === match.user_id
         ).read,
       }));
     });
   }, [matchedProfiles, clickedUser]);
+
+  useEffect(() => {
+    setNotificationArray((prev) => {
+      const test2 = prev.filter((e) => e.userId != socketNotification.userId);
+      return [...test2, socketNotification];
+    });
+  }, [socketNotification]);
 
   return (
     <>
@@ -89,14 +99,21 @@ const MatchesDisplay = ({ clickedUser, setClickedUser, socket, msgEmmited, userI
                 className="match-card option-2"
                 onClick={() => {
                   setClickedUser(match);
+                  setSocketNotification({});
+                  setNotificationArray((prev) => {
+                    const test2 = prev.filter((e) => e.userId != match.user_id);
+                    return test2;
+                  });
                 }}
               >
                 <div className="matches-img-container">
                   {!mssgRead[index.toString()] && (
-                    <div className="icon-mail"></div>
+                    <FontAwesomeIcon className="icon-mail" icon={faEnvelope} />
                   )}
-                  {socketUserArray?.find((u) => u.userId === match.user_id)
-                    ?.notification && <div className="icon-mail"></div>}
+                  {notificationArray?.find((u) => u.userId == match.user_id)
+                    ?.notification && (
+                    <FontAwesomeIcon className="icon-mail" icon={faEnvelope} />
+                  )}
 
                   {match.images && (
                     <Image
@@ -115,7 +132,7 @@ const MatchesDisplay = ({ clickedUser, setClickedUser, socket, msgEmmited, userI
         </div>
       ) : (
         <div className="loading">
-          <Loading type={"bars"} color={"#C6C9CA"} />
+          <Loading type={"bars"} color={"#fe3072"} />
         </div>
       )}
     </>

@@ -20,7 +20,9 @@
   position: absolute;
   bottom: 0;
   z-index: -1;
-  background-image: url("https://res.cloudinary.com/dhttotcxc/image/upload/v1680999924/karsten-winegeart-7vhqnO-sT88-unsplash_hui2jv.jpg");
+  background: linear-gradient(rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.29)),
+    url("https://res.cloudinary.com/dhttotcxc/image/upload/v1680999924/karsten-winegeart-7vhqnO-sT88-unsplash_hui2jv.jpg");
+
   min-width: 100vw;
   height: 100vh;
   min-height: 100vh;
@@ -33,6 +35,6 @@
 @media (max-width: 765px) {
   .home-primary-title {
     font-size: 3em;
-    margin-bottom: 30px;
+    margin-bottom: 25%;
   }
 }

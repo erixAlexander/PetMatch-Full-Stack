@@ -69,7 +69,7 @@ const DashboardMain = () => {
     try {
       await axiosPrivate.put(`${process.env.REACT_APP_URL}/addmatch`, {
         userId,
-        matchedUserId
+        matchedUserId,
       });
       getUser();
     } catch (error) {
@@ -185,7 +185,6 @@ const DashboardMain = () => {
     <>
       {user && !loading ? (
         <>
-          {" "}
           <div className="small-dashboard-body-container">
             {filteredGenderUsers?.map((character, index) => (
               <TinderCard
@@ -204,7 +203,6 @@ const DashboardMain = () => {
                   <div
                     title="Double-click To Open This Profile"
                     className="overlay"
-                    style={{ maxWidth: "96%", left: "auto", right: "auto" }}
                   >
                     <div className="dashboard-pedigree-div">
                       <TagsFromBoolean character={character} />
@@ -214,7 +212,6 @@ const DashboardMain = () => {
                       <TagsFromObject character={character} />
                     </div>
                     <div>
-                      {" "}
                       <h3 className="pet-name extra-margin">
                         <FontAwesomeIcon icon={faDog} title="doggy" />
                         <span className="capitalize">
@@ -222,7 +219,7 @@ const DashboardMain = () => {
                             ? `${character.pet_name}`
                             : `${character.pet_name.substr(0, 10)}...`}
                         </span>
-                      </h3>{" "}
+                      </h3>
                       <p className="dashboard-user-name extra-margin">
                         <FontAwesomeIcon icon={faUser} />
                         {character.first_name.length < 10

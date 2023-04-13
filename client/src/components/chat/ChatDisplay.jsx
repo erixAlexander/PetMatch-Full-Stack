@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import Chat from "./Chat";
 import ChatInput from "./ChatInput";
 import useAxiosPrivate from "../../hooks/useAxiosPrivate";
-import "./chat.css";
+import "./Chat.css";
 
 const ChatDisplay = ({ user, clickedUser, socket, readMessage }) => {
   const myUserId = user?.user_id;
@@ -12,9 +12,13 @@ const ChatDisplay = ({ user, clickedUser, socket, readMessage }) => {
   const [descendingOrderMessages, setDescendingOrderMessages] = useState(null);
   const [loading, setLoading] = useState(true);
   const [messages, setMessages] = useState([]);
-  // const [mssgReceived, setMssReceived] = useState(false);
   const [arrivalMessage, setArrivalMessage] = useState(null);
   const axiosPrivate = useAxiosPrivate();
+
+  const newMessage= ({ userId, message }) => {
+    readMessage(clickedUserId);
+    setArrivalMessage({ userId, message });
+  }
 
   const getSentUsersMessages = async () => {
     try {
@@ -86,13 +90,10 @@ const ChatDisplay = ({ user, clickedUser, socket, readMessage }) => {
   }, [messages]);
 
   useEffect(() => {
-    readMessage(clickedUserId)
-    socket.current?.on("newMessage", ({ userId, message }) => {
-      readMessage(clickedUserId)
-      setArrivalMessage({ userId, message });
-    });
+    readMessage(clickedUserId);
+    socket.current?.on("newMessage", newMessage);
     return () => {
-      socket.current.off("newMessage");
+      socket.current.off("newMessage", newMessage);
     };
   }, []);
 

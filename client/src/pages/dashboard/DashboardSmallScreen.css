@@ -8,18 +8,39 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  background-color: rgb(32, 32, 32);
+}
+
+.small-dashboard-main-container .background {
+  position: absolute;
+  top: 0;
+  left: 0;
+  min-width: 100vw;
+  min-height: 100%;
+  background-image: url(../../images/bgpaws.jpg);
+  background-position: center;
+  background-repeat: repeat;
+  background-size: contain;
+  opacity: 0.18;
+  z-index: -2;
 }
 
 .small-dashboard-header {
   position: relative;
   width: inherit;
-  flex: 0.7;
+  flex: 1;
   max-height: 7%;
   min-height: 7%;
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  justify-content: flex-end;
+  gap: 10%;
+}
+
+.petmatch {
+  font-size: 2rem;
+  font-weight: 800;
+  color: #fe3072;
+
 }
 
 .small-dashboard-body {
@@ -36,14 +57,34 @@
   position: relative;
   width: inherit;
   flex: 1.3;
-  max-height: 13%;
+  max-height: 15%;
   min-height: 10%;
   display: flex;
   align-items: flex-start;
-  justify-content: space-evenly;
-  margin-top: -5%;
+  justify-content: space-around;
   z-index: 4;
-  background-color: rgb(32, 32, 32);
-
 }
 
+.footer-icon {
+  color: rgb(22, 22, 22);
+  font-size: 2.2rem;
+}
+
+.active-icon{
+  color: #fe3072;
+}
+
+.small-circle{
+  border: solid 3px #fe3072;
+  height: 3rem;
+  width: 3rem;
+margin-right: 5%;
+}
+
+.copyrigth {
+  color: white;
+  margin: 0;
+  padding: 0;
+  position: absolute;
+  bottom: -10%;
+}

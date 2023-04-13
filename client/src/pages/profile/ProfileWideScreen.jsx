@@ -4,11 +4,10 @@ import { useCookies } from "react-cookie";
 import useAxiosPrivate from "../../hooks/useAxiosPrivate";
 import Loading from "../../components/loading/Loading";
 import Sidebar from "../../components/sidebar/Sidebar";
-import "./profile.css";
 import ProfileData from "../../components/profileData/ProfileData";
 import ProfileSecurity from "../../components/profileData/ProfileSecurity";
 import ProfileAddress from "../../components/profileData/ProfileAddress";
-import { Image } from "cloudinary-react";
+import "./profile.css";
 
 const ProfileWideScreen = () => {
   let navigate = useNavigate();
@@ -128,8 +127,9 @@ const ProfileWideScreen = () => {
         <>
           <div className="profile-main-container">
             <div className="profile-sidebar">
-              <div>
-                <p>Promociones</p>
+              <div className="promo">
+                <h1>Promos</h1>
+                <h3>comming soon</h3>
               </div>
               <div className="profile-buttons-container">
                 <button
@@ -175,14 +175,15 @@ const ProfileWideScreen = () => {
               </div>
             </div>
             <div className="profile">
-              <p
+              <div className="background"></div>
+              <button
                 onClick={() => {
                   navigate("/dashboard");
                 }}
                 className="go-back"
               >
                 {"<< Dashboard"}
-              </p>
+              </button>
               {user &&
                 showProfile &&
                 !showProfileData &&
@@ -205,16 +206,6 @@ const ProfileWideScreen = () => {
               )}
               {showProfileSecurity && <ProfileSecurity user={user} />}
               {showProfileAddress && <ProfileAddress user={user} />}
-            </div>{" "}
-            <div className="profile-dog-img">
-              {user.type_of_pet === "dog" &&
-              <Image
-                cloudName="dhttotcxc"
-                publicId="v1656458831/vecteezy_cute-dog-sitting-cartoon-vector-illustration-flat-cartoon_-removebg-preview_ndavf5.png"
-                width="200"
-                crop="scale"
-              />
-            }
             </div>
           </div>
         </>

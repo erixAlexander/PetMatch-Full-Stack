@@ -1,26 +1,21 @@
-import "./Chat.css";
 import { useEffect, useState, useRef } from "react";
-import useAxiosPrivate from "../../../hooks/useAxiosPrivate";
 import { Image } from "cloudinary-react";
-import { faXmark } from "@fortawesome/free-solid-svg-icons";
+import { faArrowLeft } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import useAxiosPrivate from "../../../hooks/useAxiosPrivate";
 import ChatInput from "./ChatInput";
+import "./Chat.css";
 
-const ChatDisplay = ({
-  user,
-  clickedUser,
-  setClickedUser,
-  socket,
-}) => {
-  const myUserId = user?.user_id;
-  const clickedUserId = clickedUser?.user_id;
+const ChatDisplay = ({ user, clickedUser, setClickedUser, socket }) => {
   const [sentUsersMessages, setSentUsersMessages] = useState(null);
   const [receivedUsersMessages, setReceivedUsersMessages] = useState(null);
-  const axiosPrivate = useAxiosPrivate();
-  const inputRef = useRef();
   const [descendingOrderMessages, setDescendingOrderMessages] = useState(null);
   const [messages, setMessages] = useState([]);
   const [arrivalMessage, setArrivalMessage] = useState(null);
+  const myUserId = user?.user_id;
+  const clickedUserId = clickedUser?.user_id;
+  const axiosPrivate = useAxiosPrivate();
+  const inputRef = useRef();
 
   const getSentUsersMessages = async () => {
     try {
@@ -109,7 +104,7 @@ const ChatDisplay = ({
         ...prev,
         {
           name: clickedUser.first_name,
-          img: clickedUser?.img || clickedUser?.images[0],
+          img: clickedUser?.images[0] || user?.url,
           message: arrivalMessage?.message,
           timestamp: new Date(),
         },
@@ -127,8 +122,7 @@ const ChatDisplay = ({
   return (
     <div className="chatDisplay-main-container">
       <div onClick={() => setClickedUser(null)} className="back-chat-display">
-        {" "}
-        <FontAwesomeIcon icon={faXmark} />
+        <FontAwesomeIcon icon={faArrowLeft} />
       </div>
       <div className="chat-display chat-display-flex">
         {descendingOrderMessages?.map((message, index) => {
@@ -179,7 +173,6 @@ const ChatDisplay = ({
         <div ref={inputRef} />
       </div>
       <div className="chat-display-flex2">
-        {" "}
         <ChatInput
           socket={socket}
           setDescendingOrderMessages={setDescendingOrderMessages}

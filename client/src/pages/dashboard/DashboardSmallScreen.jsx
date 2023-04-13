@@ -1,5 +1,4 @@
 import { useCookies } from "react-cookie";
-import Loading from "../../components/loading/Loading";
 import useAxiosPrivate from "../../hooks/useAxiosPrivate";
 import {
   faFire,
@@ -11,10 +10,11 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React, { useState, useEffect } from "react";
 import { Image } from "cloudinary-react";
 import { Link } from "react-router-dom";
-import "./DashboardSmallScreen.css";
 import DashboardMain from "../../components/cellphone/dashboard/DashboardMain";
 import Activities from "../../components/cellphone/activities/Activities";
+import Loading from "../../components/loading/Loading";
 import Chat from "../../components/cellphone/chat/Chat";
+import "./DashboardSmallScreen.css";
 
 const DashboardSmallScreen = () => {
   const [loading, setLoading] = useState(true);
@@ -49,9 +49,10 @@ const DashboardSmallScreen = () => {
     <>
       {user && !loading ? (
         <>
-          {" "}
           <div className="small-dashboard-main-container">
+            <div className="background"></div>
             <div className="small-dashboard-header">
+              <p className="petmatch">PetMtch</p>
               <div className="small-circle">
                 <Link to={"/profile"}>
                   <Image
@@ -62,25 +63,23 @@ const DashboardSmallScreen = () => {
                   />
                 </Link>
               </div>
-              <p
-                style={{ color: "white", fontWeight: "bold", fontSize: "20px" }}
-              >
-                PetMtch
-              </p>
-              <div style={{ width: "10%" }}></div>
             </div>
             {main && (
               <div className="small-dashboard-body">
                 <DashboardMain />
               </div>
             )}
-            {messages && user && <div className="small-dashboard-body">
-                <Chat user={user}/>
-              </div>}
+            {messages && user && (
+              <div className="small-dashboard-body">
+                <Chat user={user} />
+              </div>
+            )}
 
-              {activities && <div className="small-dashboard-body">
-                <Activities/>
-              </div>}
+            {activities && (
+              <div className="small-dashboard-body">
+                <Activities />
+              </div>
+            )}
             <div className="small-dashboard-footer">
               <div
                 onClick={() => {
@@ -88,12 +87,9 @@ const DashboardSmallScreen = () => {
                   setMessages(false);
                   setActivities(false);
                 }}
-                className="circle-settings"
+                className="footer-icon active-icon"
               >
-                <FontAwesomeIcon
-                  style={{ color: "white", fontSize: "22px" }}
-                  icon={faShieldDog}
-                />
+                <FontAwesomeIcon icon={faShieldDog} />
               </div>
 
               <div
@@ -102,18 +98,12 @@ const DashboardSmallScreen = () => {
                   setMessages(false);
                   setActivities(true);
                 }}
-                className="circle-settings"
+                className="footer-icon"
               >
-                <FontAwesomeIcon
-                  style={{ color: "white", fontSize: "22px" }}
-                  icon={faListSquares}
-                />
+                <FontAwesomeIcon icon={faListSquares} />
               </div>
-              <div className="circle-settings">
-                <FontAwesomeIcon
-                  style={{ color: "white", fontSize: "22px" }}
-                  icon={faFire}
-                />
+              <div className="footer-icon">
+                <FontAwesomeIcon icon={faFire} />
               </div>
               <div
                 onClick={() => {
@@ -121,23 +111,12 @@ const DashboardSmallScreen = () => {
                   setMessages(true);
                   setActivities(false);
                 }}
-                className="circle-settings"
+                className="footer-icon"
               >
-                <FontAwesomeIcon
-                  style={{ color: "white", fontSize: "22px" }}
-                  icon={faMessage}
-                />
+                <FontAwesomeIcon icon={faMessage} />
               </div>
             </div>
-            <div
-              style={{
-                color: "white",
-                margin: "0",
-                padding: "0",
-                position: "absolute",
-                bottom: "-10%",
-              }}
-            >
+            <div className="copyrigth">
               <p>CopyRigth</p>
             </div>
           </div>

@@ -1,5 +1,6 @@
 .dashboard {
-  background-color: #e9ebee;
+  position: relative;
+  background-color: #f9f9f994;
   display: flex;
   justify-content: left;
   align-items: center;
@@ -8,22 +9,36 @@
   margin: 0;
 }
 
+.dashboard .background {
+  position: absolute;
+  top: 0;
+  left: 0;
+  min-width: 100vw;
+  min-height: 100vh;
+  background-image: url(../../images/bgpaws.jpg);
+  background-position: center;
+  background-repeat: repeat;
+  background-size: contain;
+  opacity: 0.3;
+  z-index: -1;
+}
+
 .dashboard .swipe-container {
-  background-color: #e9ebee;
   display: flex;
   flex: 3;
-  max-width: 60%;
   flex-direction: column;
   justify-content: flex-start;
   align-items: center;
-  height: 100%;
+  height: 100vh;
 }
 
 .swipe {
   position: absolute;
 }
+
 .vertical-card-container {
-  height: 97%;
+  margin: auto;
+  height: 95%;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -38,8 +53,6 @@
   align-items: center;
   justify-content: center;
 }
-
-
 
 .dashboard .swipe-info {
   margin: 0;
@@ -66,13 +79,13 @@
   height: 100%;
 }
 
-.dashboard-lookingfor-container{
-position: absolute;
-margin: 0;
-padding: 0;
-bottom: 22%;
-left: 0;
-width: 100%;
+.dashboard-lookingfor-container {
+  position: absolute;
+  margin: 0;
+  padding: 0;
+  bottom: 22%;
+  left: 0;
+  width: 100%;
 }
 
 .pet-name {
@@ -96,11 +109,10 @@ width: 100%;
 .pet-name:hover {
   cursor: pointer;
   color: rgb(255, 183, 0);
-  background-color: rgba(255, 255, 255, 0.251);
-  transition: 0.3s ease;
 }
 
-.dashboard-user-name, .dashboard-card-address {
+.dashboard-user-name,
+.dashboard-card-address {
   position: absolute;
   padding-left: 10px;
   margin: 0;
@@ -112,10 +124,9 @@ width: 100%;
   gap: 10px;
 }
 
-.dashboard-card-address{
+.dashboard-card-address {
   bottom: 5%;
 }
-
 
 .gender {
   position: absolute;
@@ -141,7 +152,6 @@ width: 100%;
   margin-top: 40vh;
   margin-left: 45vw;
 }
-
 
 .overlay {
   width: 100%;
@@ -205,6 +215,6 @@ width: 100%;
   left: 5%;
 }
 
-.extra-margin{
+.extra-margin {
   margin-bottom: 10%;
 }

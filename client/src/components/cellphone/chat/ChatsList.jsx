@@ -1,22 +1,32 @@
-import "./Chat.css";
-import MatchesList from "./MatchesList";
 import { useState, useEffect } from "react";
-import Loading from "../../loading/Loading";
 import { useCookies } from "react-cookie";
-import useAxiosPrivate from "../../../hooks/useAxiosPrivate";
-import { Image } from "cloudinary-react";
-import { faArrowLeft, faArrowRight } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faArrowLeft, faArrowRight } from "@fortawesome/free-solid-svg-icons";
+import { faEnvelope } from "@fortawesome/free-solid-svg-icons";
+import { Image } from "cloudinary-react";
+import useAxiosPrivate from "../../../hooks/useAxiosPrivate";
+import MatchesList from "./MatchesList";
+import Loading from "../../loading/Loading";
+import "./Chat.css";
 
-const ChatsList = ({ setClickedUser }) => {
+const ChatsList = ({ setClickedUser, socket }) => {
   const [loading, setLoading] = useState(true);
   const [user, setUser] = useState(null);
   const [mssgRead, setMssgRead] = useState({});
   const [matchedProfiles, setMatchedProfiles] = useState([]);
   const [cookies] = useCookies(null);
-  const userId = cookies.userId;
-  const axiosPrivate = useAxiosPrivate();
   const [lastMessagesList, setLastMessagesList] = useState([]);
+  const axiosPrivate = useAxiosPrivate();
+  const userId = cookies.userId;
+  const [socketNotification, setSocketNotification] = useState({});
+  const [notificationArray, setNotificationArray] = useState([]);
+
+  const newCellNotification = ({ userId, notification }) => {
+    console.log("fgfgfgfg");
+    setSocketNotification((prev) => {
+      return { ...prev, userId, notification };
+    });
+  };
 
   const getUser = async () => {
     try {
@@ -178,6 +188,26 @@ const ChatsList = ({ setClickedUser }) => {
     });
   }, [finalOrderedMessages]);
 
+  useEffect(() => {
+    socket.current?.on("newMessage", newCellNotification);
+
+    return () => {
+      socket.current.off("newMessage", newCellNotification);
+    };
+  }, [socket]);
+
+  console.log(notificationArray);
+  useEffect(() => {
+    console.log("filtering");
+    setNotificationArray((prev) => {
+      console.log("filtering");
+      const filteredNotificationArray = prev.filter(
+        (e) => e.userId != socketNotification.userId
+      );
+      return [...filteredNotificationArray, socketNotification];
+    });
+  }, [socketNotification]);
+
   return (
     <>
       {user && !loading ? (
@@ -206,6 +236,13 @@ const ChatsList = ({ setClickedUser }) => {
                   {!mssgRead[index.toString()] && (
                     <div className="icon-mail-cell"></div>
                   )}
+                  {notificationArray?.find((u) => u.userId == match.user_id)
+                    ?.notification && (
+                    <FontAwesomeIcon
+                      className="icon-mail-cell"
+                      icon={faEnvelope}
+                    />
+                  )}
                   <div className="preview-img">
                     {match.img && (
                       <Image
@@ -219,17 +256,9 @@ const ChatsList = ({ setClickedUser }) => {
                     )}
                   </div>
                   <div className="preview-message">
-                    <p
-                      style={{
-                        margin: "0",
-                        color: "white",
-                        fontWeight: "bold",
-                      }}
-                    >
-                      {match.name}
-                    </p>
+                    <p>{match.name}</p>
                     <div className="small-chat-preview">
-                      <p style={{ margin: "0", color: "white" }}>
+                      <p>
                         {match.dir === "in" ? (
                           <FontAwesomeIcon
                             style={{ color: "green" }}
@@ -242,14 +271,9 @@ const ChatsList = ({ setClickedUser }) => {
                           />
                         )}
                       </p>
-
-                      <p style={{ margin: "0", color: "white" }}>
-                        {match?.message}
-                      </p>
+                      <p>{match?.message}</p>
                     </div>
-                    <hr
-                      style={{ width: "100%", color: "white", border: "none" }}
-                    />
+                    <hr />
                   </div>
                 </div>
               );

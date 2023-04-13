@@ -1,6 +1,6 @@
 import { useState } from "react";
 import useAxiosPrivate from "../../hooks/useAxiosPrivate";
-import "./chat.css";
+import "./Chat.css";
 
 const ChatInput = ({
   user,

@@ -1,16 +1,17 @@
 import { useState, useRef, useEffect } from "react";
-import "./Chat.css";
+import { io } from "socket.io-client";
 import ChatDisplay from "./ChatDisplay";
 import ChatsList from "./ChatsList";
-import { io } from "socket.io-client";
+import "./Chat.css";
 
 const Chat = ({ user }) => {
   const [clickedUser, setClickedUser] = useState(null);
-  const socket = useRef();
   const [msgEmmited, setMsgEmmited] = useState(false);
+  const socket = useRef();
+  const URL = process.env.REACT_APP_SOCKET;
 
   useEffect(() => {
-    socket.current = io("ws://localhost:8900");
+    socket.current = io(`${URL}`);
     return () => {
       socket.current.off("usersSocketsArray");
     };
@@ -18,7 +19,6 @@ const Chat = ({ user }) => {
 
   useEffect(() => {
     socket?.current?.emit("addUserToSocketArray", user?.user_id);
-    setMsgEmmited(!msgEmmited);
   }, [socket]);
 
   return (

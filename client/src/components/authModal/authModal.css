@@ -6,10 +6,10 @@
   align-items: center;
   max-width: 360px;
   width: 360px;
-  height: auto;
+  height: 45vh;
   background-color: white;
   border-radius: 10px;
-  padding: 40px;
+  padding: 40px 40px 80px 40px;
   left: 0;
   right: 0;
   text-align: center;
@@ -55,6 +55,7 @@ nav .nav-button:disabled {
 .auth-modal form {
   display: flex;
   flex-direction: column;
+  margin: 20px 0 40px 0;
 }
 .auth-modal input[type="password"],
 .auth-modal input[type="email"] {
@@ -88,7 +89,7 @@ nav .nav-button:disabled {
   margin-left: 0.25rem;
 }
 .x-mark {
-  font-size: 18px;
+  font-size: 1.5rem;
 }
 .x-mark:hover {
   color: rgb(66, 3, 3);
@@ -96,12 +97,11 @@ nav .nav-button:disabled {
 
 @media (max-width: 765px) {
   .auth-modal {
-
     top: 30px;
     font-size: 14px;
-    max-width: 280px;
+    max-width: 80vw;
+    max-height: 50vh;
     padding: 20px 40px;
-    padding-bottom: 180px;
   }
   .authmodal-get-app {
     font-size: 14px;

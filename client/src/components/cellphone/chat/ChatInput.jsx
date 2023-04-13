@@ -42,7 +42,7 @@ const ChatInput = ({
         ...prev,
         {
           name: user?.first_name,
-          img: clickedUser?.img || clickedUser?.images[0],
+          img: user?.images[0] || user?.url,
           message: message?.message,
           timestamp: message?.timestamp,
         },

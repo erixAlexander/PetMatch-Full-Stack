@@ -1,6 +1,9 @@
-const io = require("socket.io")(8900, {
+require("dotenv").config();
+const URL = process.env.FRONTEND;
+const PORT = process.env.PORT;
+const io = require("socket.io")(PORT, {
   cors: {
-    origin: "http://localhost:3000",
+    origin: URL,
   },
 });
 
@@ -24,14 +27,14 @@ io.on("connection", (socket) => {
     addUser(userId, socket.id);
     socket.emit("usersSocketsArray", users);
   });
-  
-  socket.on("sendMessage", ({userId, receiverId, message}) => {
-    const user = getUser(receiverId)
-    console.log(message)
+
+  socket.on("sendMessage", ({ userId, receiverId, message }) => {
+    const user = getUser(receiverId);
+
     socket.to(user?.socketId).emit("newMessage", {
       userId,
       message,
-      notification: true
+      notification: true,
     });
   });
 

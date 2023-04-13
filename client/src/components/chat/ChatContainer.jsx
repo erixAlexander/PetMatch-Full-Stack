@@ -1,20 +1,26 @@
-import MatchesDisplay from "../matches/MatchesDisplay";
-import ChatDisplay from "./ChatDisplay";
-import Chatheader from "./Chatheader";
 import { useState, useRef, useEffect } from "react";
 import { io } from "socket.io-client";
-import useAxiosPrivate from "../../hooks/useAxiosPrivate";
 import { useCookies } from "react-cookie";
-import "./chat.css";
+import useAxiosPrivate from "../../hooks/useAxiosPrivate";
+import MatchesDisplay from "./MatchesDisplay";
+import ChatDisplay from "./ChatDisplay";
+import Chatheader from "./Chatheader";
+import "./Chat.css";
 
 const ChatContainer = ({ user }) => {
-
   const [cookies] = useCookies(null);
-  const userId = cookies.userId;
   const [clickedUser, setClickedUser] = useState(null);
-  const [msgEmmited, setMsgEmmited] = useState(false);
+  const [socketNotification, setSocketNotification] = useState({});
   const axiosPrivate = useAxiosPrivate();
   const socket = useRef();
+  const userId = cookies.userId;
+  const URL = process.env.REACT_APP_SOCKET;
+
+  const newNotification = ({ userId, notification }) => {
+    setSocketNotification((prev) => {
+      return { ...prev, userId, notification };
+    });
+  };
 
   const readMessage = async (match_id) => {
     try {
@@ -28,7 +34,7 @@ const ChatContainer = ({ user }) => {
   };
 
   useEffect(() => {
-    socket.current = io("ws://localhost:8900");
+    socket.current = io(`${URL}`);
     return () => {
       socket.current.off("usersSocketsArray");
     };
@@ -36,7 +42,14 @@ const ChatContainer = ({ user }) => {
 
   useEffect(() => {
     socket?.current?.emit("addUserToSocketArray", user?.user_id);
-    setMsgEmmited(!msgEmmited);
+  }, [socket]);
+
+  useEffect(() => {
+    socket.current?.on("newMessage", newNotification);
+
+    return () => {
+      socket.current.off("newMessage", newNotification);
+    };
   }, [socket]);
 
   return (
@@ -62,7 +75,8 @@ const ChatContainer = ({ user }) => {
           socket={socket}
           setClickedUser={setClickedUser}
           clickedUser={clickedUser}
-          msgEmmited={msgEmmited}
+          socketNotification={socketNotification}
+          setSocketNotification={setSocketNotification}
         />
       )}
       {clickedUser && (

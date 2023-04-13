@@ -1,32 +1,59 @@
+::-webkit-scrollbar {
+  -webkit-appearance: none;
+  width: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+  border-radius: 5px;
+  background-color: rgba(0, 0, 0, 0.5);
+  -webkit-box-shadow: 0 0 1px rgba(255, 255, 255, 0.5);
+}
+
 .profile {
-  position: relative;
   display: flex;
   flex-direction: column;
-  width: 100%;
-  height: 100%;
-  justify-content: center;
+  min-height: 100vh;
+  justify-content: flex-start;
   align-items: center;
-  margin-top: 5vh;
+  position: relative;
+  width: calc(100% - 300px);
+  overflow: scroll;
+}
 
+.profile .background {
+  position: absolute;
+  top: 0;
+  left: 0;
+  min-width: 100%;
+  min-height: 100vh;
+  background-image: url(../../images/bgpaws.jpg);
+  background-position: center;
+  background-repeat: repeat;
+  background-size: contain;
+  opacity: 0.1;
+  z-index: -2;
 }
 
 .profile-main-container {
   display: flex;
-  justify-content: flex-start;
-  max-height: 100vh;
+  justify-content: flex-end;
+  height: 100%;
 }
 
 .profile-sidebar {
+  position: fixed;
+  top: 0;
+  left: 0;
   display: flex;
   flex-direction: column;
   align-items: flex-start;
   justify-content: space-between;
-  background-color: #e9ebee;
-  height: 100vh;
-
-  max-width: 30%;
-  min-width: 21%;
-  border-right: solid 1px #68a7ad;
+  background-color: white;
+  min-height: 100vh;
+  max-width: 50%;
+  min-width: 300px;
+  border-right: solid 2px gray;
+  z-index: 1;
 }
 .sidebar-pet-name {
   width: fit-content;
@@ -38,13 +65,14 @@
   display: flex;
   justify-content: center;
   align-items: flex-start;
+  flex-wrap: wrap;
 }
 
 .profile form section {
   display: flex;
   flex-direction: column;
   padding: 2%;
-  width: 50%;
+  width: 40%;
   text-align: start;
 }
 
@@ -60,14 +88,14 @@
 .profile form .url-label {
   color: rgb(255, 255, 255);
   font-weight: bolder;
-  background-color: #68a7ad;
+  background-color: #fe3072;
   border: none;
   transition: 0.3s ease;
 }
 
 .profile form .url-label:hover {
   cursor: pointer;
-  background-color: #99c4c8;
+  background-color: #fe3072;
   transition: 0.3s ease;
 }
 
@@ -84,6 +112,7 @@
 .profile form .multiple-input-container {
   display: flex;
   flex-direction: row;
+  flex-wrap: wrap;
 }
 
 .profile form .multiple-input-container input {
@@ -101,7 +130,7 @@
 .profile form input[type="checkbox"]:checked + label {
   color: rgb(255, 255, 255);
   font-weight: bolder;
-  background-color: #68a7ad;
+  background-color: #fe3072;
   border: none;
   transition: 0.3s ease;
 }
@@ -119,7 +148,7 @@
 .profile form input[type="radio"]:checked + label {
   color: rgb(255, 255, 255);
   font-weight: bolder;
-  background-color: #68a7ad;
+  background-color: #fe3072;
   border: none;
   transition: 0.3s ease;
 }
@@ -127,10 +156,10 @@
 .profile form input[type="radio"]:hover + label,
 .profile form input[type="checkbox"]:hover + label {
   cursor: pointer;
-  background-color: #99c4c8;
+  background-color: #fe3072;
   transition: 0.15s ease;
   color: white;
-  border: solid 2px #99c4c8;
+  border: solid 2px #fe3072;
 }
 
 .profile form input[type="submit"]:hover {
@@ -204,17 +233,17 @@
 
 .profile-buttons {
   height: 50px;
-  background-color: white;
+  background-color: gray;
   border: none;
-  border-top: solid 1px #68a7ad;
-  color: rgb(97, 97, 97);
+  border-top: solid 4px white;
+  color: white;
   font-weight: bold;
   font-size: 14px;
 }
 
 .profile-buttons:hover,
 .profile-buttons:active {
-  background-color: #99c4c8;
+  background-color: #fe3072;
   color: white;
   font-weight: bold;
   transition: 300ms ease;
@@ -223,17 +252,23 @@
 
 .main-security-container {
   height: 80vh;
+  width: 100%;
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
   align-items: center;
 }
 
+div.main-security-container > form {
+  width: 100%;
+}
+
 .profile-security-container {
+  margin-top: 45px;
   display: flex;
   flex-direction: column;
   width: 800px;
-  max-width: 35%;
+  max-width: 55%;
   min-width: 25%;
 }
 
@@ -257,21 +292,26 @@
   top: -2%;
 }
 
-.go-back {
+.profile .go-back {
   position: absolute;
-  top: 1vh;
-  left: 2vw;
-  font-size: 14px;
-  font-weight: bolder;
-  color: black;
-  transition: 300ms ease;
+  top: 2%;
+  left: 3%;
+  color: #fff;
+  font-size: 12px;
+  background: #fe3072;
+  border-radius: 15px;
+  border: none;
+  padding: 15px 15px;
+  transition: 0.6s;
+  display: flex;
+  align-items: center;
+  font-weight: 700;
+  transition: 0.6s;
 }
 
-.go-back:hover {
+.profile .go-back:hover {
   cursor: pointer;
-  color: gray;
-  font-size: 12px;
-  transition: 300ms ease;
+  background: #da381f;
 }
 
 .credentials-button-container {
@@ -289,16 +329,16 @@
 }
 
 .security-hr-sidebar {
-  background-color: #68a7ad;
+  background-color: #fe3072;
   height: 4px;
   border: 0;
   width: 12%;
-  margin-top: -10px;
+  margin-top: 10px;
 }
 
 .security-button {
   border: #68a7ad solid 2px;
-  background-color: #68a7ad;
+  background-color: #fe3072;
   color: white;
   font-weight: bold;
 }
@@ -307,34 +347,35 @@
   border-radius: 10px;
   padding: 10px 18px;
   border: #68a7ad solid 2px;
-  background-color: #68a7ad;
+  background-color: #fe3072;
   color: white;
   font-weight: bold;
   font-size: 16px;
 }
 
-.primary-title-button{
+.primary-title-button {
   border-radius: 10px;
   padding: 10px 18px;
-  border: #68a7ad solid 2px;
-  background-color: #68a7ad;
+  border: #fe3072 solid 2px;
+  background-color: #fe3072;
   color: white;
   font-weight: bold;
   font-size: 16px;
 }
 
-.primary-submit-button{
+.primary-submit-button {
   margin: 10px;
   border-radius: 10px;
   padding: 10px 18px;
   font-weight: bold;
   font-size: 16px;
   background-color: rgb(114, 114, 114);
-  color:white;
+  color: white;
   border: solid 2px rgb(114, 114, 114);
 }
 
-.primary-submit-button:hover, .primary-title-button:hover{
+.primary-submit-button:hover,
+.primary-title-button:hover {
   cursor: pointer;
   filter: brightness(1.1);
 }
@@ -344,9 +385,22 @@
   bottom: 5%;
   right: 100px;
 }
+
+.profile h1 {
+  margin-top: 10%;
+}
+
+.promo{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  min-height: 100%;
+  flex: 4;
+}
 @media (max-width: 1800px) {
   .profile-dog-img {
     display: none;
   }
 }
-

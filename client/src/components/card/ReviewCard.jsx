@@ -11,10 +11,7 @@ import ShareIcon from "@mui/icons-material/Share";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import MoreVertIcon from "@mui/icons-material/MoreVert";
 import { Image } from "cloudinary-react";
-import {
-  faCircleArrowRight,
-  faCircleArrowLeft,
-} from "@fortawesome/free-solid-svg-icons";
+import { faArrowRight, faArrowLeft } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import "./ReviewCard.css";
 
@@ -29,7 +26,12 @@ const ExpandMore = styled((props) => {
   }),
 }));
 
-export default function ReviewCard({ petInfo, imgIndex, setImageIndex, swipe }) {
+export default function ReviewCard({
+  petInfo,
+  imgIndex,
+  setImageIndex,
+  swipe,
+}) {
   const [expanded, setExpanded] = React.useState(false);
 
   const handleExpandClick = () => {
@@ -45,7 +47,7 @@ export default function ReviewCard({ petInfo, imgIndex, setImageIndex, swipe }) 
           </IconButton>
         }
         title={`${petInfo?.pet_name}`}
-        subheader={`Owner: ${petInfo?.first_name}`}
+        className="card-title"
       />
       <div className="sidebar-card">
         {petInfo?.images[0]?.id &&
@@ -77,18 +79,10 @@ export default function ReviewCard({ petInfo, imgIndex, setImageIndex, swipe }) 
 
       <div className="arrow-icons-sidebar">
         <IconButton onClick={() => setImageIndex(imgIndex - 1)}>
-          <FontAwesomeIcon
-            
-            className="arrow-icon-sidebar"
-            icon={faCircleArrowLeft}
-          />
+          <FontAwesomeIcon className="arrow-icon-sidebar" icon={faArrowLeft} />
         </IconButton>
         <IconButton onClick={() => setImageIndex(imgIndex + 1)}>
-          <FontAwesomeIcon
-            
-            className="arrow-icon-sidebar"
-            icon={faCircleArrowRight}
-          />
+          <FontAwesomeIcon className="arrow-icon-sidebar" icon={faArrowRight} />
         </IconButton>
       </div>
 
@@ -102,11 +96,14 @@ export default function ReviewCard({ petInfo, imgIndex, setImageIndex, swipe }) 
         </p>
       </CardContent>
       <CardActions disableSpacing>
-        <IconButton onClick={()=> swipe("right")} aria-label="add to favorites">
-          <FavoriteIcon  />
+        <IconButton
+          onClick={() => swipe("right")}
+          aria-label="add to favorites"
+        >
+          <FavoriteIcon className="favorite-icon"/>
         </IconButton>
         <IconButton aria-label="share">
-          <ShareIcon />
+          <ShareIcon className="share-icon"/>
         </IconButton>
         <ExpandMore
           expand={expanded}
@@ -118,28 +115,29 @@ export default function ReviewCard({ petInfo, imgIndex, setImageIndex, swipe }) 
         </ExpandMore>
       </CardActions>
       <Collapse in={expanded} timeout="auto" unmountOnExit>
-        {petInfo.looking_for && <CardContent>
-          <h3 className="title-sidebar">Looking For</h3>
-          <div className="tags-sidebar">
-            {petInfo?.looking_for &&
-              Object.keys(petInfo.looking_for).map(
-                (key) =>
-                  petInfo.looking_for[key] === true && (
-                    <h3
-                      key={`${key}${petInfo.user_id}`}
-                      className="pet-tag-sidebar"
-                    >
-                      {key}
-                    </h3>
-                  )
-              )}
-          </div>
-          <div>
-            <h3>Year of Birth</h3>
-            {petInfo.dob_year}
-           
-          </div>
-        </CardContent>}
+        {petInfo.looking_for && (
+          <CardContent>
+            <h3 className="title-sidebar">Looking For</h3>
+            <div className="tags-sidebar">
+              {petInfo?.looking_for &&
+                Object.keys(petInfo.looking_for).map(
+                  (key) =>
+                    petInfo.looking_for[key] === true && (
+                      <h3
+                        key={`${key}${petInfo.user_id}`}
+                        className="pet-tag-sidebar"
+                      >
+                        {key}
+                      </h3>
+                    )
+                )}
+            </div>
+            <div>
+              <h3>Year of Birth</h3>
+              {petInfo.dob_year}
+            </div>
+          </CardContent>
+        )}
       </Collapse>
     </Card>
   );

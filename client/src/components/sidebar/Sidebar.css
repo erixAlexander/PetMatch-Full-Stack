@@ -1,8 +1,8 @@
 .sidebar-icon {
   font-size: 26px;
   margin-top: 15px;
-  color: #68A7AD;
-  border: solid 2px #68A7AD;
+  color: #68a7ad;
+  border: solid 2px #68a7ad;
   border-radius: 50%;
   padding: 10px;
   transition: 300ms ease;
@@ -21,17 +21,23 @@
   margin: 10px 0px 0px 0px;
   color: white;
   border-radius: 5px;
-  background-color: #68A7AD;
+  background-color: #68a7ad;
   padding: 0px 10px;
 }
 
 .title-sidebar {
-  margin-bottom: 5px;
+  margin: 5px;
   color: rgb(57, 57, 57);
 }
 
+.card-title{
+  margin: 15px 0;
+  text-transform: capitalize;
+  border-bottom: #fe3072 solid 4px;
+}
+
 .hr-sidebar {
-  background-color: #68A7AD;
+  background-color: #68a7ad;
   height: 4px;
   border: 0;
   width: 12%;
@@ -58,10 +64,6 @@
   margin-bottom: -20%;
 }
 
-
-  
-
-
 .sidebar-card img {
   position: absolute;
   top: 0;
@@ -69,7 +71,7 @@
   width: 100%;
   opacity: 0;
   max-height: 80%;
-  object-fit:contain;
+  object-fit: contain;
 }
 
 .pet-info-sidebar {
@@ -92,25 +94,28 @@
   color: white;
 }
 
-.capitalize{
-    text-transform: capitalize;
+.capitalize {
+  text-transform: capitalize;
 }
 
-.arrow-icons-sidebar{
- margin-top: -7%;
+.arrow-icons-sidebar {
   width: 100%;
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 5%;
-  font-size: 30px;
-  color: #68A7AD;
+  gap: 15%;
+  transition: 0.4s ease;
 }
 
-.arrow-icon-sidebar:hover{
-cursor: pointer;
-color: #99C4C8;
-transition: 0.4s ease;
+.arrow-icon-sidebar{
+  padding: 6px;
+  font-size: 2rem;
+  color: #fe3072;
+}
+
+.arrow-icon-sidebar:hover {
+  cursor: pointer;
+  color: black;
 }
 
 .sidebar-card .activeSlide {
@@ -124,36 +129,42 @@ transition: 0.4s ease;
   transform: translateX(100%);
 }
 
-.sidebar-pedigree-div{
+.sidebar-pedigree-div {
   position: absolute;
   top: 2%;
   left: 5%;
-  outline: #68A7AD;
+  outline: #68a7ad;
 }
 
-.sidebar-up-icon{
+.sidebar-up-icon {
   font-size: 16px;
   transition: 300ms;
 }
 
-.sidebar-up-icon:hover{
+.sidebar-up-icon:hover {
   font-size: 18px;
   cursor: pointer;
   filter: brightness(1.4);
   transition: 300ms;
-
 }
 
 .sidebar-close-icon {
   position: absolute;
-  top:2%;
+  top: 2%;
   right: 5%;
   font-size: 20px;
-
 }
 
 .sidebar-close-icon:hover {
   cursor: pointer;
   color: red;
   font-size: 22px;
+}
+
+.favorite-icon{
+  color: #fe3072;
+}
+
+.share-icon{
+  color: #68a7ad;
 }

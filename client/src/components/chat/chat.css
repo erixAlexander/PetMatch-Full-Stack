@@ -1,7 +1,8 @@
 .chat-container {
   background-color: white;
-  flex: 1;
-  max-width: 25%;
+  flex: 1.5;
+  max-width: 30%;
+  min-width: 300px;
   height: 100vh;
   text-align: left;
   z-index: 1;
@@ -24,13 +25,14 @@
 /* ================Header============== */
 
 .chat-container-header-div {
-  background-color: #68a7ad;
+  background-color: #fe3072; 
   flex: 1.5;
   display: flex;
   justify-content: space-between;
   align-items: center;
   z-index: 2;
   max-width: 100%;
+  min-height: 100px;
   flex-wrap: wrap;
 }
 
@@ -75,15 +77,10 @@
   margin: 0 2%;
 }
 
-.match-card:hover {
-  height: 19%;
-  width: 23%;
-  transition: 300ms ease;
-}
 
 .match-card h4 {
   position: absolute;
-  bottom: -10%;
+  bottom: 0;
   left: 10%;
   z-index: 3;
   color: white;
@@ -174,7 +171,7 @@ textarea {
   padding: 3% 3%;
   border-radius: 10px 10px 10px 0px;
   margin: 0;
-  background-color: #68a7ad;
+  background-color: #fe3072;
   color: white;
   display: inline-block;
   word-break: break-word;
@@ -282,13 +279,12 @@ textarea {
 
 .icon-mail {
   position: absolute;
-  right: -16%;
-  bottom: -3%;
-  width: 14px;
-  height: 14px;
-  background-color: rgb(90, 237, 64);
-  border-radius: 50%;
-  border: white solid 2px
+  right: -14%;
+  top: -1%;
+  width: 1.4rem;
+  height: 1.4rem;
+  color: #fe3072;
+  z-index: 5;
 }
 
 .overlay-match-card {
@@ -299,6 +295,12 @@ textarea {
   top: 0;
   left: 0;
   border-radius: 10px;
+  transition: 0.6s;
+}
+
+.overlay-match-card:hover{
+  background-color: #69142f24;
+
 }
 
 .image-cloudinary-chatheader:hover{

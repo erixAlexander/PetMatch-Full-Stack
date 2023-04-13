@@ -1,5 +1,4 @@
 import { useState, useEffect } from "react";
-import "./ProfileSmallScreen.css";
 import { Image } from "cloudinary-react";
 import { useCookies } from "react-cookie";
 import Loading from "../../components/loading/Loading";
@@ -14,6 +13,7 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import ContentSlider from "../../components/contentSlider/ContentSlider";
+import "./ProfileSmallScreen.css";
 
 const Profile = () => {
   const [imgUrl, setImgUrl] = useState("");
@@ -46,23 +46,16 @@ const Profile = () => {
     <>
       {user && (
         <>
+          <Link to={"/dashboard"}>
+            <div className="link-dashboard-icon">
+              <FontAwesomeIcon className="dashboard-icon" icon={faAnglesLeft} />
+            </div>
+          </Link>
           <div className="main-small-profile-container">
-            <Link to={"/dashboard"}>
-              <div className="link-dashboard-icon">
-                <FontAwesomeIcon
-                  style={{
-                    fontSize: "22px",
-                    fontWeight: "bold",
-                    color: "white",
-                    marginLeft: "10px",
-                  }}
-                  icon={faAnglesLeft}
-                />
-              </div>
-            </Link>
+            <div className="background"></div>
             <div className="secondary-small-profile-container">
               <div className="small-profile-title">
-                <h3>Profile</h3>
+                <h1>Profile</h1>
                 <hr className="small-profile-hr-title" />
               </div>
 
@@ -84,7 +77,7 @@ const Profile = () => {
                   title="Verify your Profile"
                   style={{
                     fontSize: "20px",
-                    color: "white",
+                    color: "black",
                     marginLeft: "5px",
                   }}
                   icon={faUserCheck}
@@ -98,31 +91,17 @@ const Profile = () => {
                       icon={faGears}
                     />
                   </div>
-                  <h4
-                    style={{
-                      color: "white",
-                    }}
-                  >
-                    Settings
-                  </h4>
+                  <h4>Settings</h4>
                 </div>
                 <div className="small-profile-icons-name">
-                  {" "}
                   <div className="small-profile-main-icons middle">
                     <FontAwesomeIcon
                       className="small-profile-icons"
                       icon={faPencil}
                     />
                   </div>
-                  <h4
-                    style={{
-                      color: "white",
-                    }}
-                  >
-                    Edit
-                  </h4>
+                  <h4>Edit</h4>
                 </div>
-
                 <div className="small-profile-icons-name">
                   <div className="small-profile-main-icons">
                     <FontAwesomeIcon
@@ -130,13 +109,7 @@ const Profile = () => {
                       icon={faShield}
                     />
                   </div>
-                  <h4
-                    style={{
-                      color: "white",
-                    }}
-                  >
-                    Security
-                  </h4>
+                  <h4>Security</h4>
                 </div>
               </div>
             </div>

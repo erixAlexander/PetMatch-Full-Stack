@@ -1,10 +1,10 @@
 import { useCookies } from "react-cookie";
 import { useNavigate } from "react-router-dom";
 import useAxiosPrivate from "../../hooks/useAxiosPrivate";
-import "./chat.css";
 import { faSignOut, faUser } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {Image} from "cloudinary-react"
+import "./Chat.css";
 
 const ChatHeader = ({ user }) => {
   let navigate = useNavigate();

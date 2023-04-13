@@ -1,12 +1,7 @@
 require("dotenv").config();
-// const { MongoClient } = require("mongodb");
-// const { v4: uuidv4 } = require("uuid");
-// const bcrypt = require("bcrypt");
-// const jwt = require("jsonwebtoken");
 const cors = require("cors");
 const express = require("express");
 const PORT = process.env.PORT || 8000;
-// const URI = process.env.URI;
 const mongoose = require("mongoose");
 const connectDB = require("./config/dbConn");
 const verifyJWT = require("./middleware/verifyJWT");
@@ -14,9 +9,7 @@ const credentials = require("./middleware/credentials");
 const corsOptions = require("./config/corsOptions");
 const cookieParser = require("cookie-parser");
 
-// Connect to MongoDB
 connectDB();
-
 const app = express();
 
 app.use(express.urlencoded({ extended: false }));
