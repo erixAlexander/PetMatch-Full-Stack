@@ -1,9 +1,10 @@
 require("dotenv").config();
 const URL = process.env.FRONTEND;
 const PORT = process.env.PORT;
+
 const io = require("socket.io")(PORT, {
   cors: {
-    origin: URL,
+    origin: ['http://localhost:3000', 'https://petmatchlove.netlify.app' , `${URL}`]
   },
 });
 
