@@ -79,7 +79,6 @@ const ChatsList = ({
   }, []);
 
   useEffect(() => {
-    console.log(user);
     if (user) {
       const likedUsers = user?.user_matches;
       const userLikedUserIds = likedUsers?.map(({ user_id }) => user_id);
@@ -124,7 +123,6 @@ const ChatsList = ({
   };
 
   useEffect(() => {
-    console.log(matchedProfiles);
     matchedProfiles?.forEach(async (match) => {
       let sentMssg = await getSentUsersMessages(user.user_id, match.user_id);
       let receiveMssg = await getReceivedUsersMessages(
@@ -179,7 +177,6 @@ const ChatsList = ({
 
   useEffect(() => {
     finalOrderedMessages.forEach((match, index) => {
-      console.log(user.user_matches);
       setMssgRead((prevState) => ({
         ...prevState,
         [index]: user?.user_matches?.find(
@@ -231,23 +228,17 @@ const ChatsList = ({
                   className="small-chat-preview"
                 >
                   {!mssgRead[index.toString()] && (
-                    <>
-                      <FontAwesomeIcon
-                        className="icon-mail-cell"
-                        icon={faEnvelope}
-                      />
-                      <p>mongo</p>
-                    </>
+                    <FontAwesomeIcon
+                      className="icon-mail-cell"
+                      icon={faEnvelope}
+                    />
                   )}
                   {notificationArray?.find((u) => u.userId == match.user_id)
                     ?.notification && (
-                    <>
-                      <FontAwesomeIcon
-                        className="icon-mail-cell"
-                        icon={faEnvelope}
-                      />
-                      <p>socket</p>
-                    </>
+                    <FontAwesomeIcon
+                      className="icon-mail-cell"
+                      icon={faEnvelope}
+                    />
                   )}
                   <div className="preview-img">
                     {match.img && (

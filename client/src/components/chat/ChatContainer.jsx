@@ -66,7 +66,6 @@ const ChatContainer = ({ user }) => {
               const test2 = prev.filter((e) => e.userId != clickedUser.user_id);
               return test2;
             });
-            console.log(clickedUser);
             setTimeout(() => {
               setClickedUser(null);
             }, 1000);

@@ -144,11 +144,9 @@ const ChatDisplay = ({
     <div className="chatDisplay-main-container">
       <div
         onClick={() => {
-          console.log(clickedUserId);
           readMessage(clickedUserId);
           setSocketNotification({});
           setNotificationArray((prev) => {
-            console.log(prev);
             const test2 = prev.filter((e) => e.userId != clickedUserId);
             return test2;
           });

@@ -19,7 +19,6 @@ const Chat = ({ user }) => {
   };
 
   useEffect(() => {
-    console.log(URL);
     socket.current = io(`${URL}`);
     return () => {
       socket.current.off("usersSocketsArray");
