@@ -6,7 +6,14 @@ import useAxiosPrivate from "../../../hooks/useAxiosPrivate";
 import ChatInput from "./ChatInput";
 import "./Chat.css";
 
-const ChatDisplay = ({ user, clickedUser, setClickedUser, socket }) => {
+const ChatDisplay = ({
+  user,
+  clickedUser,
+  setClickedUser,
+  socket,
+  setSocketNotification,
+  setNotificationArray,
+}) => {
   const [sentUsersMessages, setSentUsersMessages] = useState(null);
   const [receivedUsersMessages, setReceivedUsersMessages] = useState(null);
   const [descendingOrderMessages, setDescendingOrderMessages] = useState(null);
@@ -16,6 +23,10 @@ const ChatDisplay = ({ user, clickedUser, setClickedUser, socket }) => {
   const clickedUserId = clickedUser?.user_id;
   const axiosPrivate = useAxiosPrivate();
   const inputRef = useRef();
+
+  const newCellMessage = ({ userId, message }) => {
+    setArrivalMessage({ userId, message });
+  };
 
   const getSentUsersMessages = async () => {
     try {
@@ -86,14 +97,9 @@ const ChatDisplay = ({ user, clickedUser, setClickedUser, socket }) => {
   }, [messages]);
 
   useEffect(() => {
-    // readMessage(clickedUserId)
-    socket.current?.on("newMessage", ({ userId, message }) => {
-      // readMessage(clickedUserId)
-      console.log("new message");
-      setArrivalMessage({ userId, message });
-    });
+    socket.current?.on("newMessage", newCellMessage);
     return () => {
-      socket.current.off("newMessage");
+      socket.current.off("newMessage", newCellMessage);
     };
   }, []);
 
@@ -104,7 +110,7 @@ const ChatDisplay = ({ user, clickedUser, setClickedUser, socket }) => {
         ...prev,
         {
           name: clickedUser.first_name,
-          img: clickedUser?.images[0] || user?.url,
+          img: clickedUser?.img || clickedUser?.images[0],
           message: arrivalMessage?.message,
           timestamp: new Date(),
         },
@@ -119,9 +125,39 @@ const ChatDisplay = ({ user, clickedUser, setClickedUser, socket }) => {
     scrollToBottom();
   }, [descendingOrderMessages]);
 
+  const readMessage = async (match_id) => {
+    try {
+      const response = await axiosPrivate.put(
+        `${process.env.REACT_APP_URL}/read-message`,
+        {
+          match_id,
+          userId: myUserId,
+        }
+      );
+      console.log(response);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   return (
     <div className="chatDisplay-main-container">
-      <div onClick={() => setClickedUser(null)} className="back-chat-display">
+      <div
+        onClick={() => {
+          console.log(clickedUserId);
+          readMessage(clickedUserId);
+          setSocketNotification({});
+          setNotificationArray((prev) => {
+            console.log(prev);
+            const test2 = prev.filter((e) => e.userId != clickedUserId);
+            return test2;
+          });
+          setTimeout(() => {
+            setClickedUser(null);
+          }, 1000);
+        }}
+        className="back-chat-display"
+      >
         <FontAwesomeIcon icon={faArrowLeft} />
       </div>
       <div className="chat-display chat-display-flex">

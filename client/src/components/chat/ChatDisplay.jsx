@@ -16,7 +16,7 @@ const ChatDisplay = ({ user, clickedUser, socket, readMessage }) => {
   const axiosPrivate = useAxiosPrivate();
 
   const newMessage= ({ userId, message }) => {
-    readMessage(clickedUserId);
+    // 
     setArrivalMessage({ userId, message });
   }
 

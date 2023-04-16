@@ -12,12 +12,13 @@ const MatchesDisplay = ({
   userId,
   socketNotification,
   setSocketNotification,
+  notificationArray,
+  setNotificationArray
 }) => {
   const [loading, setLoading] = useState(true);
   const [user, setUser] = useState(null);
   const [mssgRead, setMssgRead] = useState({});
   const [matchedProfiles, setMatchedProfiles] = useState([]);
-  const [notificationArray, setNotificationArray] = useState([]);
   const axiosPrivate = useAxiosPrivate();
 
   const getUser = async () => {
@@ -83,7 +84,7 @@ const MatchesDisplay = ({
 
   useEffect(() => {
     setNotificationArray((prev) => {
-      const test2 = prev.filter((e) => e.userId != socketNotification.userId);
+      const test2 = prev.filter((e) => e.userId != socketNotification?.userId);
       return [...test2, socketNotification];
     });
   }, [socketNotification]);

@@ -11,6 +11,7 @@ const ChatContainer = ({ user }) => {
   const [cookies] = useCookies(null);
   const [clickedUser, setClickedUser] = useState(null);
   const [socketNotification, setSocketNotification] = useState({});
+  const [notificationArray, setNotificationArray] = useState([]);
   const axiosPrivate = useAxiosPrivate();
   const socket = useRef();
   const userId = cookies.userId;
@@ -59,7 +60,16 @@ const ChatContainer = ({ user }) => {
         <button
           className="option"
           onClick={() => {
-            setClickedUser(null);
+            readMessage(clickedUser.user_id);
+            setSocketNotification({});
+            setNotificationArray((prev) => {
+              const test2 = prev.filter((e) => e.userId != clickedUser.user_id);
+              return test2;
+            });
+            console.log(clickedUser);
+            setTimeout(() => {
+              setClickedUser(null);
+            }, 1000);
           }}
         >
           Matches
@@ -77,6 +87,8 @@ const ChatContainer = ({ user }) => {
           clickedUser={clickedUser}
           socketNotification={socketNotification}
           setSocketNotification={setSocketNotification}
+          notificationArray={notificationArray}
+          setNotificationArray={setNotificationArray}
         />
       )}
       {clickedUser && (

@@ -9,7 +9,14 @@ import MatchesList from "./MatchesList";
 import Loading from "../../loading/Loading";
 import "./Chat.css";
 
-const ChatsList = ({ setClickedUser, socket }) => {
+const ChatsList = ({
+  setClickedUser,
+  socketNotification,
+  setSocketNotification,
+  notificationArray,
+  setNotificationArray,
+  clickedUser,
+}) => {
   const [loading, setLoading] = useState(true);
   const [user, setUser] = useState(null);
   const [mssgRead, setMssgRead] = useState({});
@@ -18,15 +25,6 @@ const ChatsList = ({ setClickedUser, socket }) => {
   const [lastMessagesList, setLastMessagesList] = useState([]);
   const axiosPrivate = useAxiosPrivate();
   const userId = cookies.userId;
-  const [socketNotification, setSocketNotification] = useState({});
-  const [notificationArray, setNotificationArray] = useState([]);
-
-  const newCellNotification = ({ userId, notification }) => {
-    console.log("fgfgfgfg");
-    setSocketNotification((prev) => {
-      return { ...prev, userId, notification };
-    });
-  };
 
   const getUser = async () => {
     try {
@@ -81,6 +79,7 @@ const ChatsList = ({ setClickedUser, socket }) => {
   }, []);
 
   useEffect(() => {
+    console.log(user);
     if (user) {
       const likedUsers = user?.user_matches;
       const userLikedUserIds = likedUsers?.map(({ user_id }) => user_id);
@@ -125,6 +124,7 @@ const ChatsList = ({ setClickedUser, socket }) => {
   };
 
   useEffect(() => {
+    console.log(matchedProfiles);
     matchedProfiles?.forEach(async (match) => {
       let sentMssg = await getSentUsersMessages(user.user_id, match.user_id);
       let receiveMssg = await getReceivedUsersMessages(
@@ -179,6 +179,7 @@ const ChatsList = ({ setClickedUser, socket }) => {
 
   useEffect(() => {
     finalOrderedMessages.forEach((match, index) => {
+      console.log(user.user_matches);
       setMssgRead((prevState) => ({
         ...prevState,
         [index]: user?.user_matches?.find(
@@ -189,18 +190,7 @@ const ChatsList = ({ setClickedUser, socket }) => {
   }, [finalOrderedMessages]);
 
   useEffect(() => {
-    socket.current?.on("newMessage", newCellNotification);
-
-    return () => {
-      socket.current.off("newMessage", newCellNotification);
-    };
-  }, [socket]);
-
-  console.log(notificationArray);
-  useEffect(() => {
-    console.log("filtering");
     setNotificationArray((prev) => {
-      console.log("filtering");
       const filteredNotificationArray = prev.filter(
         (e) => e.userId != socketNotification.userId
       );
@@ -229,19 +219,35 @@ const ChatsList = ({ setClickedUser, socket }) => {
                   onClick={() => {
                     setClickedUser(match);
                     readMessage(match.user_id);
+                    setSocketNotification({});
+                    setNotificationArray((prev) => {
+                      const test2 = prev.filter(
+                        (e) => e.userId != match.user_id
+                      );
+                      return test2;
+                    });
                   }}
                   key={index}
                   className="small-chat-preview"
                 >
                   {!mssgRead[index.toString()] && (
-                    <div className="icon-mail-cell"></div>
+                    <>
+                      <FontAwesomeIcon
+                        className="icon-mail-cell"
+                        icon={faEnvelope}
+                      />
+                      <p>mongo</p>
+                    </>
                   )}
                   {notificationArray?.find((u) => u.userId == match.user_id)
                     ?.notification && (
-                    <FontAwesomeIcon
-                      className="icon-mail-cell"
-                      icon={faEnvelope}
-                    />
+                    <>
+                      <FontAwesomeIcon
+                        className="icon-mail-cell"
+                        icon={faEnvelope}
+                      />
+                      <p>socket</p>
+                    </>
                   )}
                   <div className="preview-img">
                     {match.img && (
