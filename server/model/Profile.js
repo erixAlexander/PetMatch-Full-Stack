@@ -21,18 +21,10 @@ const Profile = new Schema({
   about: {
     type: String,
   },
-  dob_month: {
-    type: Number,
-    min: 1,
-    max: 12,
-  },
   dob_year: {
     type: Number,
     min: 1900,
     max: 2022,
-  },
-  first_name: {
-    type: String,
   },
   pet_name: {
     type: String,
@@ -46,17 +38,14 @@ const Profile = new Schema({
   gender_interest: {
     type: String,
   },
-  looking_for:{
+  looking_for: {
     type: lookingFor,
   },
-  user_matches:{
+  user_matches: {
     type: Array,
   },
-  images:{
-    type: Array,
-  },
-  pedigree:{
-    type: Boolean
+  pedigree: {
+    type: Boolean,
   },
   refreshToken: {
     type: String,

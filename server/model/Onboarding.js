@@ -46,21 +46,11 @@ const onboarding = new Schema({
     type: String,
     required: true,
   },
-  dob_month: {
-    type: Number,
-    required: true,
-    min: 1,
-    max: 12,
-  },
   dob_year: {
     type: Number,
     required: true,
     min: 1900,
     max: 2022,
-  },
-  first_name: {
-    type: String,
-    required: true,
   },
   pet_name: {
     type: String,
@@ -78,26 +68,26 @@ const onboarding = new Schema({
     type: String,
     required: true,
   },
-  looking_for:{
+  looking_for: {
     type: lookingFor,
     required: true,
   },
-  user_matches:{
+  user_matches: {
     type: Array,
     required: true,
   },
-  images:{
+  images: {
     type: Array,
     required: true,
   },
-  pedigree:{
-    type: Boolean
+  pedigree: {
+    type: Boolean,
   },
   distance: {
     type: Number,
     required: true,
   },
-  address_info:{
+  address_info: {
     type: addressInfo,
     required: true,
   },

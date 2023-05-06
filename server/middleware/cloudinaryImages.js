@@ -18,7 +18,7 @@ const cloudinaryImages = async (req, res, next) => {
           timeout:120000
         })
         .then((result) => {
-          //console.log("*** Success: Cloudinary Upload", result);
+          console.log("*** Success: Cloudinary Upload", result);
           responsesArray.push({id : result.public_id, url :result.url});
         })
         .catch((err) => {

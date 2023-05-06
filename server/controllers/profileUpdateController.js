@@ -1,12 +1,12 @@
-const Profile = require("../model/Profile"); 
+const Profile = require("../model/Profile");
 
 const profileUpdate = async (req, res) => {
-  const formData = req.body.cleanFormData;
+  const formData = req.body.formData;
 
-  if (!req?.body?.cleanFormData?.user_id) {
+  if (!formData?.user_id) {
     return res.status(400).json({ message: "ID parameter is required." });
   }
-
+ 
   const query = { user_id: formData.user_id };
   const user = await Profile.findOne(query);
   if (req?.user !== user?.email) {
@@ -26,7 +26,6 @@ const profileUpdate = async (req, res) => {
       about: formData.about,
       looking_for: formData.looking_for,
       user_matches: formData.user_matches,
-      images: req.imagesArray,
       pedigree: formData.pedigree,
     };
     const updatedUser = await Profile.findOneAndUpdate(
