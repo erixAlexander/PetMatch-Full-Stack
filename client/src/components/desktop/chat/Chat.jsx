@@ -1,6 +1,6 @@
-import { Image } from "cloudinary-react";
 import { useRef, useEffect } from "react";
-import Loading from "../loading/Loading";
+import { Image } from "cloudinary-react";
+import Loading from "../../loading/Loading";
 import UserMessage from "./UserMessage";
 import MatchMessage from "./MatchMessage";
 import "./Chat.css";
@@ -26,7 +26,7 @@ const Chat = ({ descendingOrderMessages, user, loading }) => {
           <div className="chat-display">
             {descendingOrderMessages &&
               descendingOrderMessages?.map((message, index) => {
-                if (message?.name === user.first_name) {
+                if (message?.name === user.pet_name) {
                   return (
                     <UserMessage
                       descendingOrderMessages={descendingOrderMessages}

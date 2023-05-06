@@ -16,10 +16,8 @@
 .dropdown-list {
   display: flex;
   flex-direction: column;
-  align-items: space-between;
   justify-content: flex-start;
   max-width: 100%;
-  padding: 5px 0px;
   margin: 10px 0;
   font-size: 14px;
   border: solid 2px rgb(219, 219, 219);
@@ -28,7 +26,7 @@
   list-style-type: none;
 }
 
-.dropdown-option-button {
+.onboarding form .dropdown-option-button, .dropdown-option-button {
   color: rgb(108, 108, 108);
   display: flex;
   justify-content: space-between;
@@ -38,10 +36,12 @@
   border: 0;
   width: 100%;
   text-align: left;
+  margin: 0;
+  border-radius: 0;
 }
 
-.dropdown-option-button:hover,
-.dropdown-option-button:focus {
+.onboarding form .dropdown-option-button:hover,
+.onboarding form .dropdown-option-button:focus {
   cursor: pointer;
   font-weight: bolder;
   color: white;

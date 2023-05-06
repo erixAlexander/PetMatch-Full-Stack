@@ -1,7 +1,7 @@
-import "./Address.css";
-import SearchBox from "./SearchBox";
 import { faMapLocationDot } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import SearchBox from "./SearchBox";
+import "./Address.css";
 
 const Address = ({ user }) => {
   return (

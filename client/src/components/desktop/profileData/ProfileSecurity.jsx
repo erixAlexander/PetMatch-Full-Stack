@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { axiosPrivate } from "../../api/axios";
+import { axiosPrivate } from "../../../api/axios";
 import {
   faCheck,
   faTimes,
@@ -9,7 +9,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useCookies } from "react-cookie";
 import { useNavigate } from "react-router-dom";
 
-const ProfileSecurity = ({ user }) => { 
+const ProfileSecurity = ({ user }) => {
   const USER_REGEX = /.+@.+\.[A-Za-z]{1,23}$/;
   const PWD_REGEX = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%.]).{8,24}$/;
 

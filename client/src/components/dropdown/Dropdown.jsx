@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { faXmark, faSortDown } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import "./Dropdown.css"
+import "./Dropdown.css";
 
 function Dropdown({ items = [], multiSelect = false, handleChange, user }) {
   const [open, setOpen] = useState(false);
@@ -9,8 +9,8 @@ function Dropdown({ items = [], multiSelect = false, handleChange, user }) {
   const toggle = () => setOpen(!open);
 
   function handleOnClick(e, item) {
-    handleChange(e)
-
+    console.log(e.target.name);
+    handleChange(e);
     if (!selection.some((current) => current === item)) {
       if (!multiSelect) {
         setSelection([item]);
@@ -24,8 +24,8 @@ function Dropdown({ items = [], multiSelect = false, handleChange, user }) {
       );
       setSelection([...selectionAfterRemoval]);
     }
-    
-    toggle()
+
+    toggle();
   }
 
   function isItemInSelection(item) {
@@ -36,26 +36,43 @@ function Dropdown({ items = [], multiSelect = false, handleChange, user }) {
   }
 
   return (
-    <div className="onboarding-dropdown-maindiv" >
+    <div className="onboarding-dropdown-maindiv">
       <div
         tabIndex={0}
         className="onboarding-dropdown-div"
         role="button"
-        onKeyPress={() => toggle(!open)}
-        onClick={() => toggle(!open)}
+        onClick={() => toggle()}
       >
         <div>
-          <p>{selection.length ? selection[0] : user?.type_of_pet ? user?.type_of_pet : "Please select:" }</p>
+          <p>
+            {selection.length
+              ? selection[0]
+              : user?.type_of_pet
+              ? user?.type_of_pet
+              : "Please select:"}
+          </p>
         </div>
         <div>
-          <p>{open ? <FontAwesomeIcon style={{fontSize:"18px"}} icon={faXmark} /> : <FontAwesomeIcon style={{fontSize:"18px"}} icon={faSortDown} />}</p>
+          <p>
+            {open ? (
+              <FontAwesomeIcon style={{ fontSize: "18px" }} icon={faXmark} />
+            ) : (
+              <FontAwesomeIcon style={{ fontSize: "18px" }} icon={faSortDown} />
+            )}
+          </p>
         </div>
       </div>
       {open && (
         <ul className="dropdown-list">
           {items.map((item, index) => (
             <li className="dd-list-item" key={index}>
-              <button className="dropdown-option-button" name="type_of_pet" value={item} type="button" onClick={(e) => handleOnClick(e, item)}>
+              <button
+                className="dropdown-option-button"
+                name="type_of_pet"
+                value={item}
+                type="button"
+                onClick={(e) => handleOnClick(e, item)}
+              >
                 <span>{item}</span>
                 <span>{isItemInSelection(item) && "Selected"}</span>
               </button>

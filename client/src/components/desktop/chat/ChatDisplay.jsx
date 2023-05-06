@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import Chat from "./Chat";
 import ChatInput from "./ChatInput";
-import useAxiosPrivate from "../../hooks/useAxiosPrivate";
+import useAxiosPrivate from "../../../hooks/useAxiosPrivate";
 import "./Chat.css";
 
 const ChatDisplay = ({ user, clickedUser, socket, readMessage }) => {
@@ -64,7 +64,7 @@ const ChatDisplay = ({ user, clickedUser, socket, readMessage }) => {
     setMessages([]);
     sentUsersMessages?.forEach((message) => {
       const formattedsentMessage = {};
-      formattedsentMessage["name"] = user?.first_name;
+      formattedsentMessage["name"] = user?.pet_name;
       formattedsentMessage["img"] = user?.images[0] || user?.url;
       formattedsentMessage["message"] = message?.message;
       formattedsentMessage["timestamp"] = message?.timestamp;
@@ -73,7 +73,7 @@ const ChatDisplay = ({ user, clickedUser, socket, readMessage }) => {
 
     receivedUsersMessages?.forEach((message) => {
       const formattedsentMessage = {};
-      formattedsentMessage["name"] = clickedUser?.first_name;
+      formattedsentMessage["name"] = clickedUser?.pet_name;
       formattedsentMessage["img"] = clickedUser?.images[0] || clickedUser?.url;
       formattedsentMessage["message"] = message?.message;
       formattedsentMessage["timestamp"] = message?.timestamp;
@@ -103,7 +103,7 @@ const ChatDisplay = ({ user, clickedUser, socket, readMessage }) => {
       setDescendingOrderMessages((prev) => [
         ...prev,
         {
-          name: clickedUser.first_name,
+          name: clickedUser.pet_name,
           img: clickedUser?.images[0] || user?.url,
           message: arrivalMessage?.message,
           timestamp: new Date(),

@@ -1,5 +1,5 @@
 import { useState } from "react";
-import useAxiosPrivate from "../../hooks/useAxiosPrivate";
+import useAxiosPrivate from "../../../hooks/useAxiosPrivate";
 import "./Chat.css";
 
 const ChatInput = ({
@@ -25,11 +25,11 @@ const ChatInput = ({
       return;
     }
 
-    socket.current?.emit('sendMessage', {
+    socket.current?.emit("sendMessage", {
       userId: myUserId,
-      receiverId:clickedUserId,
-      message: message.message
-    })
+      receiverId: clickedUserId,
+      message: message.message,
+    });
     try {
       const response = await axiosPrivate.post(
         `${process.env.REACT_APP_URL}/message`,
@@ -40,19 +40,19 @@ const ChatInput = ({
       setDescendingOrderMessages((prev) => [
         ...prev,
         {
-          name: user?.first_name,
+          name: user?.pet_name,
           img: user?.images[0] || user?.url,
           message: message?.message,
           timestamp: message?.timestamp,
         },
       ]);
-      setTextArea(""); 
+      setTextArea("");
 
       const success = response.status == 200;
       success &&
         (await axiosPrivate.put(`${process.env.REACT_APP_URL}/write-message`, {
           myUserId,
-          clickedUserId
+          clickedUserId,
         }));
     } catch (error) {
       console.log(error);

@@ -27,12 +27,11 @@
 .small-dashboard-header {
   position: relative;
   width: inherit;
-  flex: 1;
   max-height: 7%;
   min-height: 7%;
   display: flex;
   align-items: center;
-  justify-content: flex-end;
+  justify-content: space-around;
   gap: 10%;
 }
 
@@ -87,4 +86,9 @@ margin-right: 5%;
   padding: 0;
   position: absolute;
   bottom: -10%;
+}
+
+.small-dashboard-header .sign-out{
+  color: gray;
+  font-size: 1.7rem;
 }

@@ -1,4 +1,4 @@
-import Address from "../address/Address";
+import Address from "../../address/Address";
 
 const ProfileAdress = ({user}) => {
   return (

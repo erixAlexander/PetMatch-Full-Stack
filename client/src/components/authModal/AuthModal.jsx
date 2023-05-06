@@ -1,39 +1,38 @@
 import React, { useRef, useState, useEffect } from "react";
-import axios from "axios";
-import { useNavigate, useLocation } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { useCookies } from "react-cookie";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faCheck,
   faTimes,
   faInfoCircle,
   faXmark,
 } from "@fortawesome/free-solid-svg-icons";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import axios from "axios";
 import "./authModal.css";
 
 const AuthModal = ({ setShowModal, isSignUp }) => {
   const USER_REGEX = /.+@.+\.[A-Za-z]{1,23}$/;
   const PWD_REGEX = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%.]).{8,24}$/;
 
-  const userRef = useRef();
-  const [email, setEmail] = useState(null);
+  const emailRef = useRef();
+  const [email, setEmail] = useState("");
   const [validEmail, setValidEmail] = useState(false);
 
-  const [password, setPassword] = useState(null);
+  const [password, setPassword] = useState("");
   const [validPassword, setValidPassword] = useState(false);
 
-  const [confirmedPassword, setConfirmedPassword] = useState(null);
+  const [confirmedPassword, setConfirmedPassword] = useState("");
   const [validMatch, setValidMatch] = useState(false);
 
-  const [error, setError] = useState(null);
+  const [error, setError] = useState("");
 
   let navigate = useNavigate();
-  let location = useLocation();
 
   const [cookies, setCookie, removeCookie] = useCookies("user");
 
   useEffect(() => {
-    userRef.current.focus();
+    emailRef.current.focus();
   }, []);
 
   useEffect(() => {
@@ -76,7 +75,7 @@ const AuthModal = ({ setShowModal, isSignUp }) => {
       );
 
       setCookie("userId", response.data.userId, {
-        maxAge: 24 * 60 * 60 * 1000,
+        maxAge: 60 * 60 * 24,
       });
 
       const success = response.status === 201;
@@ -113,7 +112,7 @@ const AuthModal = ({ setShowModal, isSignUp }) => {
           type="email"
           id="email"
           name="email"
-          ref={userRef}
+          ref={emailRef}
           placeholder="email"
           autoComplete="off"
           required="{true}"

@@ -7,6 +7,7 @@
   max-width: 360px;
   width: 360px;
   height: 45vh;
+  height: fit-content;
   background-color: white;
   border-radius: 10px;
   padding: 40px 40px 80px 40px;
@@ -22,11 +23,11 @@ nav .nav-button:disabled {
   cursor: default;
 }
 
-.close-icon {
+.auth-modal .close-icon {
   float: right;
 }
 
-.close-icon:hover {
+.auth-modal .close-icon:hover {
   cursor: pointer;
   font-weight: 700;
 }
@@ -100,7 +101,7 @@ nav .nav-button:disabled {
     top: 30px;
     font-size: 14px;
     max-width: 80vw;
-    max-height: 50vh;
+    min-height: fit-content;
     padding: 20px 40px;
   }
   .authmodal-get-app {

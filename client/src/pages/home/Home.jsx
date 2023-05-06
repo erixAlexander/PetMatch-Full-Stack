@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { useCookies } from "react-cookie";
 import Nav from "../../components/navbar/Navbar";
 import AuthModal from "../../components/authModal/AuthModal";
@@ -33,7 +33,6 @@ const Home = () => {
   return (
     <div className="home-container">
       <Nav
-        minimal={false}
         setShowModal={setShowModal}
         ShowModal={ShowModal}
         setIsSignUp={setIsSignUp}

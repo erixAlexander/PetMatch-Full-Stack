@@ -1,12 +1,10 @@
 import { useState, useEffect } from "react";
 import { useCookies } from "react-cookie";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faArrowLeft, faArrowRight } from "@fortawesome/free-solid-svg-icons";
-import { faEnvelope } from "@fortawesome/free-solid-svg-icons";
-import { Image } from "cloudinary-react";
 import useAxiosPrivate from "../../../hooks/useAxiosPrivate";
 import MatchesList from "./MatchesList";
 import Loading from "../../loading/Loading";
+import ChatListMessages from "./ChatListMessages";
 import "./Chat.css";
 
 const ChatsList = ({
@@ -15,7 +13,6 @@ const ChatsList = ({
   setSocketNotification,
   notificationArray,
   setNotificationArray,
-  clickedUser,
 }) => {
   const [loading, setLoading] = useState(true);
   const [user, setUser] = useState(null);
@@ -57,7 +54,6 @@ const ChatsList = ({
             ).length > 0
         )
       );
-      setLoading(false);
     } catch (error) {
       console.log(error);
     }
@@ -116,6 +112,7 @@ const ChatsList = ({
           },
         }
       );
+      setLoading(false);
       return response.data;
     } catch (error) {
       console.log(error);
@@ -136,7 +133,7 @@ const ChatsList = ({
 
       sentMssg?.forEach((message) => {
         const formattedsentMessage = {};
-        formattedsentMessage["name"] = match?.first_name;
+        formattedsentMessage["name"] = match?.pet_name;
         formattedsentMessage["user_id"] = match?.user_id;
         formattedsentMessage["img"] = match?.images[0];
         formattedsentMessage["message"] = message?.message;
@@ -147,7 +144,7 @@ const ChatsList = ({
 
       receiveMssg?.forEach((message) => {
         const formattedsentMessage = {};
-        formattedsentMessage["name"] = match?.first_name;
+        formattedsentMessage["name"] = match?.pet_name;
         formattedsentMessage["user_id"] = match?.user_id;
         formattedsentMessage["img"] = match?.images[0];
         formattedsentMessage["message"] = message?.message;
@@ -210,75 +207,22 @@ const ChatsList = ({
           </div>
           <div className="small-chat-secondary-container">
             <h2 className="small-chat-title">Chats</h2>
-            {finalOrderedMessages.map((match, index) => {
-              return (
-                <div
-                  onClick={() => {
-                    setClickedUser(match);
-                    readMessage(match.user_id);
-                    setSocketNotification({});
-                    setNotificationArray((prev) => {
-                      const test2 = prev.filter(
-                        (e) => e.userId != match.user_id
-                      );
-                      return test2;
-                    });
-                  }}
-                  key={index}
-                  className="small-chat-preview"
-                >
-                  {!mssgRead[index.toString()] && (
-                    <FontAwesomeIcon
-                      className="icon-mail-cell"
-                      icon={faEnvelope}
-                    />
-                  )}
-                  {notificationArray?.find((u) => u.userId == match.user_id)
-                    ?.notification && (
-                    <FontAwesomeIcon
-                      className="icon-mail-cell"
-                      icon={faEnvelope}
-                    />
-                  )}
-                  <div className="preview-img">
-                    {match.img && (
-                      <Image
-                        cloudName="dhttotcxc"
-                        publicId={match.img?.id}
-                        height="50"
-                        crop="scale"
-                        fetchFormat="auto"
-                        quality="auto"
-                      />
-                    )}
-                  </div>
-                  <div className="preview-message">
-                    <p>{match.name}</p>
-                    <div className="small-chat-preview">
-                      <p>
-                        {match.dir === "in" ? (
-                          <FontAwesomeIcon
-                            style={{ color: "green" }}
-                            icon={faArrowRight}
-                          />
-                        ) : (
-                          <FontAwesomeIcon
-                            style={{ color: "red" }}
-                            icon={faArrowLeft}
-                          />
-                        )}
-                      </p>
-                      <p>{match?.message}</p>
-                    </div>
-                    <hr />
-                  </div>
-                </div>
-              );
-            })}
+            <ChatListMessages
+              finalOrderedMessages={finalOrderedMessages}
+              setClickedUser={setClickedUser}
+              readMessage={readMessage}
+              setSocketNotification={setSocketNotification}
+              setNotificationArray={setNotificationArray}
+              mssgRead={mssgRead}
+              FontAwesomeIcon={FontAwesomeIcon}
+              notificationArray={notificationArray}
+            />
           </div>
         </div>
       ) : (
-        <Loading type={"spin"} color={"#C6C9CA"} />
+        <div className="chatdisplay-loading">
+          <Loading type={"spin"} color={"#fe3072"} />
+        </div>
       )}
     </>
   );

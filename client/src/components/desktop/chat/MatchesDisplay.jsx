@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
-import Loading from "../loading/Loading";
-import useAxiosPrivate from "../../hooks/useAxiosPrivate";
+import Loading from "../../loading/Loading";
+import useAxiosPrivate from "../../../hooks/useAxiosPrivate";
 import { Image } from "cloudinary-react";
 import { faEnvelope } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -13,7 +13,7 @@ const MatchesDisplay = ({
   socketNotification,
   setSocketNotification,
   notificationArray,
-  setNotificationArray
+  setNotificationArray,
 }) => {
   const [loading, setLoading] = useState(true);
   const [user, setUser] = useState(null);
@@ -125,7 +125,7 @@ const MatchesDisplay = ({
                     />
                   )}
                   <div className="overlay-match-card"></div>
-                  <h4>{match?.first_name}</h4>
+                  <h4>{match?.pet_name}</h4>
                 </div>
               </div>
             );

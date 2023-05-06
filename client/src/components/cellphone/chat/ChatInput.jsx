@@ -41,7 +41,7 @@ const ChatInput = ({
       setDescendingOrderMessages((prev) => [
         ...prev,
         {
-          name: user?.first_name,
+          name: user?.pet_name,
           img: user?.images[0] || user?.url,
           message: message?.message,
           timestamp: message?.timestamp,

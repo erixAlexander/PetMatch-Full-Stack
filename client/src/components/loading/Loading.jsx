@@ -1,9 +1,12 @@
-import React from "react";
 import ReactLoading from "react-loading";
-import "../chat/Chat.css";
 
-const Loading = ({ type, color }) => (
-  <ReactLoading type={type} color={color} height={"15%"} width={"15%"} />
+const Loading = ({ type, color, height1, width1 }) => (
+  <ReactLoading
+    type={type}
+    color={color}
+    height={height1 || "15%"}
+    width={width1 || "15%"}
+  />
 );
 
 export default Loading;

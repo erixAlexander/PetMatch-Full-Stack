@@ -1,121 +1,38 @@
 import { useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
-import { useCookies } from "react-cookie";
-import useAxiosPrivate from "../../hooks/useAxiosPrivate";
 import Loading from "../../components/loading/Loading";
 import Sidebar from "../../components/sidebar/Sidebar";
-import ProfileData from "../../components/profileData/ProfileData";
-import ProfileSecurity from "../../components/profileData/ProfileSecurity";
-import ProfileAddress from "../../components/profileData/ProfileAddress";
+import ProfileData from "../../components/desktop/profileData/ProfileData";
+import ProfileSecurity from "../../components/desktop/profileData/ProfileSecurity";
+import ProfileAddress from "../../components/desktop/profileData/ProfileAddress";
 import "./profile.css";
+import useAxiosPrivate from "../../hooks/useAxiosPrivate";
 
-const ProfileWideScreen = () => {
+const ProfileWideScreen = ({
+  formData,
+  setFormData,
+  userInfoFormData,
+  handleSubmit,
+  loading,
+  handleChange,
+  getUser,
+  user,
+  userId,
+}) => {
   let navigate = useNavigate();
-  const [cookies] = useCookies("user");
-  const userId = cookies.userId;
-  const axiosPrivate = useAxiosPrivate();
-  const [loading, setLoading] = useState(true);
-  const [user, setUser] = useState("");
   const [showProfileData, setShowProfileData] = useState(false);
   const [showProfileSecurity, setShowProfileSecurity] = useState(false);
   const [showProfileAddress, setShowProfileAddress] = useState(false);
   const [showProfile, setShowProfile] = useState(true);
-  const [formData, setFormData] = useState({
-    user_id: cookies.userId,
-    first_name: "",
-    pet_name: "",
-    dob_month: "",
-    dob_year: "",
-    gender_identity: "",
-    type_of_pet: "",
-    gender_interest: "",
-    about: "",
-    looking_for: {
-      mate: false,
-      friend: false,
-      adopt: false,
-      give_for_adoption: false,
-    },
-    images: [],
-    pedigree: false,
-  });
-
-  const getUser = async () => {
-    try {
-      const response = await axiosPrivate.get(
-        `${process.env.REACT_APP_URL}/user`,
-        {
-          params: { userId },
-        }
-      );
-      setUser(response?.data);
-      setLoading(false);
-    } catch (error) {
-      console.log(error);
-    }
-  };
+  const axiosPrivate = useAxiosPrivate();
 
   useEffect(() => {
-    getUser();
+    getUser(userId);
   }, []);
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    setLoading(true);
-    try {
-      const asArray = Object.entries(formData);
-      const filtered = asArray.filter(
-        ([key, value]) =>
-          value.length > 0 ||
-          value === true ||
-          (key === "looking_for" &&
-            Object.entries(value).find(([k, v]) => v === true)) ||
-          (key === "pedigree" &&
-            key === "type_of_pet" &&
-            key &&
-            formData.pedigree !== key)
-      );
-      const cleanFormData = Object.fromEntries(filtered);
-      console.log(cleanFormData);
-      const response = await axiosPrivate.put(
-        `${process.env.REACT_APP_URL}/profile`,
-        {
-          cleanFormData,
-        }
-      );
-
-      const success = response.status == 200;
-      if (success) {
-        window.location.reload();
-      }
-    } catch (error) {
-      console.log(error);
-    }
-  };
-
-  const handleChange = (e) => {
-    if (e.target.name === "looking_for") {
-      const checked = e.target.checked;
-      const value = e.target.value;
-      const name = e.target.name;
-      setFormData((prevState) => ({
-        ...prevState,
-        [name]: { ...prevState.looking_for, [value]: checked },
-      }));
-      return;
-    }
-    const value =
-      e.target.type === "checkbox" && e.target.name === "pedigree"
-        ? e.target.checked
-        : e.target.name === "type_of_pet"
-        ? e.target.value.toLowerCase()
-        : e.target.value;
-    const name = e.target.name;
-    setFormData((prevState) => ({
-      ...prevState,
-      [name]: value,
-    }));
-  };
+  useEffect(() => {
+    userInfoFormData(user);
+  }, [user]);
 
   return (
     <>
@@ -189,11 +106,7 @@ const ProfileWideScreen = () => {
                 !showProfileData &&
                 !showProfileSecurity &&
                 !showProfileAddress && (
-                  <Sidebar
-                    petInfo={user}
-                    handleSidebar={(e) => console.log(e)}
-                    activeSidebar={true}
-                  />
+                  <Sidebar petInfo={user} activeSidebar={true} />
                 )}
               {user && showProfileData && (
                 <ProfileData
