@@ -28,7 +28,8 @@ const updateUserInfo = async (req, res) => {
       images: req.imagesArray,
       pedigree: formData.pedigree,
       distance: formData.distance,
-      address_info: formData.address_info
+      address_info: formData.address_info,
+      activity: formData.activity,
     };
     const updatedUser = await onboarding
       .findOneAndUpdate(query, updateDocument)

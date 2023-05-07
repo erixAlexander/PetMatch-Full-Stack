@@ -40,6 +40,7 @@ app.use("/read-message", require("./routes/api/read-message"));
 app.use("/delete-images", require("./routes/api/delete-images"));
 app.use("/update-images", require("./routes/api/update-images"));
 app.use("/add-images", require("./routes/api/add-images"));
+app.use("/add-activity", require("./routes/api/add-activity"));
 app.use("/write-message", require("./routes/api/write-message"));
 
 mongoose.connection.once("open", () => {

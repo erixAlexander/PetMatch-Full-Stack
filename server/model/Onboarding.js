@@ -91,6 +91,9 @@ const onboarding = new Schema({
     type: addressInfo,
     required: true,
   },
+  activity: {
+    type: String,
+  },
   refreshToken: {
     type: String,
   },

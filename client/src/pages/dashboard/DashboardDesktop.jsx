@@ -122,6 +122,7 @@ const DashboardDesktop = ({
       await childRefs[currentIndex]?.current.swipe(dir);
     }
   };
+  
   const swiped = (direction, swipedUserId, index) => {
     if (direction === "right") {
       updateMatches(userId, swipedUserId);

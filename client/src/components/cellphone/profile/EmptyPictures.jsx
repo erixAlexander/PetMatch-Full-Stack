@@ -11,7 +11,7 @@ const EmptyPictures = ({
   const addPicture = (e, num) => {
     const checkError = checkInput(e);
     if (checkError == "error") return;
-    console.log(checkError)
+
     setArray((prev) => {
       return prev.map((number) => {
         if (number == num) {

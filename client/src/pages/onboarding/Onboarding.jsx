@@ -36,6 +36,7 @@ const OnBoarding = () => {
       full_name: "",
     },
     distance: 40,
+    activity: "",
   });
 
   return (

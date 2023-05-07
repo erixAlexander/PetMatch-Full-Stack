@@ -56,6 +56,7 @@ const DashboardCellPhone = ({
                   genderedUsers={genderedUsers}
                   userId={userId}
                   updateMatches={updateMatches}
+                  user={user}
                 />
               )}
             </div>

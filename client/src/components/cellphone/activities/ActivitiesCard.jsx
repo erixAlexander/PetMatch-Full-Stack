@@ -1,58 +1,111 @@
 import React, { useEffect, useMemo, useState } from "react";
 import TinderCard from "react-tinder-card";
+import BackgroundImage from "./BackgroundImage";
+import CardInfo from "./CardInfo";
+import useAxiosPrivate from "../../../hooks/useAxiosPrivate";
+import CardButtons from "./CardButtons";
+import Loading from "../../loading/Loading";
 
 const ActivitiesCard = ({
   setShowCard,
-  genderedUsers,
   userId,
   updateMatches,
+  user,
+  activity,
 }) => {
   const [currentIndex, setCurrentIndex] = useState(null);
-  const updateCurrentIndex = (val) => {
-    setCurrentIndex(val);
-    // currentIndexRef.current = val;
+  const [activityUsers, setActivityUsers] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const axiosPrivate = useAxiosPrivate();
+
+  const getActivityUsers = async () => {
+    try {
+      const response = await axiosPrivate.get(
+        `${process.env.REACT_APP_URL}/add-activity`,
+        {
+          params: { userId, activity },
+        }
+      );
+
+      setActivityUsers(shuffleArray(response?.data));
+      setLoading(false);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const shuffleArray = (array) => {
+    for (let i = array?.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      const temp = array[i];
+      array[i] = array[j];
+      array[j] = temp;
+    }
+    return array;
   };
 
   useEffect(() => {
-    setCurrentIndex(genderedUsers?.length - 1);
-  }, [genderedUsers]);
+    if (user && activity && !activityUsers.length) {
+      getActivityUsers(userId);
+    }
+  }, [user]);
+
+  useEffect(() => {
+    setCurrentIndex(activityUsers?.length - 1);
+  }, [activityUsers]);
 
   const childRefs = useMemo(
     () =>
-      Array(genderedUsers?.length)
+      Array(activityUsers?.length)
         .fill(0)
         .map((i) => React.createRef()),
-    [genderedUsers]
+    [activityUsers]
   );
 
   const swiped = (direction, swipedUserId, index) => {
     if (direction === "right") {
       updateMatches(userId, swipedUserId);
     }
-    updateCurrentIndex(index - 1);
+    setCurrentIndex(index - 1);
   };
-  console.log(currentIndex)
+  console.log(activityUsers);
 
   return (
     <div className="activities-card-container">
       <h1 onClick={() => setShowCard(false)}>Activity</h1>
-      {genderedUsers.map((genderedUser, index) => {
-        return (
-          <TinderCard
-            key={genderedUser.user_id}
-            onSwipe={(dir) => swiped(dir, genderedUser.user_id, index)}
-            ref={childRefs[index]}
-            className="activities-card"
-          >
-            <div
-              style={{
-                backgroundImage: `url(${genderedUser.images[0].url})`,
-              }}
-              className="activities-card-img"
-            ></div>
-          </TinderCard>
-        );
-      })}
+      {loading ? (
+        <div className="activities-loading">
+          <Loading type={"spin"} color={"#fe3072"} />
+        </div>
+      ) : activityUsers.length > 0 ? (
+        <>
+          {activityUsers.map((activityUser, index) => {
+            return (
+              <TinderCard
+                key={activityUser.user_id}
+                onSwipe={(dir) => swiped(dir, activityUser.user_id, index)}
+                ref={childRefs[index]}
+                className="activities-card"
+              >
+                <BackgroundImage activityUser={activityUser} />
+
+                <CardInfo activityUser={activityUser} />
+              </TinderCard>
+            );
+          })}
+          <CardButtons
+            activityUsers={activityUsers}
+            setCurrentIndex={setCurrentIndex}
+            currentIndex={currentIndex}
+            childRefs={childRefs}
+          />
+        </>
+      ) : (
+        <div className="no-activity-users">
+          <h2>There are no users in this activity at the moment</h2>
+          <p>Come back soon!</p>
+        </div>
+      )}
     </div>
   );
 };
