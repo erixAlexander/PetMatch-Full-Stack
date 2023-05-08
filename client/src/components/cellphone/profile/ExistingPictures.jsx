@@ -25,8 +25,7 @@ const ExistingPictures = ({
   };
 
   const changeImage = (e, id, change) => {
-    const checkError = checkInput(e);
-    if (checkError == "error") return;
+    if (change == "change" && checkInput(e) == "error") return;
 
     setImgArray((prev) => {
       return prev.map((img) => {

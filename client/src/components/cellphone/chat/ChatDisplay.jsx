@@ -4,8 +4,8 @@ import { faArrowLeft } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import useAxiosPrivate from "../../../hooks/useAxiosPrivate";
 import ChatInput from "./ChatInput";
-import "./Chat.css";
 import Loading from "../../loading/Loading";
+import "./Chat.css";
 
 const ChatDisplay = ({
   user,
@@ -15,7 +15,6 @@ const ChatDisplay = ({
   setSocketNotification,
   setNotificationArray,
 }) => {
-
   const [sentUsersMessages, setSentUsersMessages] = useState(null);
   const [receivedUsersMessages, setReceivedUsersMessages] = useState(null);
   const [descendingOrderMessages, setDescendingOrderMessages] = useState(null);
@@ -28,7 +27,6 @@ const ChatDisplay = ({
   const inputRef = useRef();
 
   const newCellMessage = ({ userId, message }) => {
-    console.log('neewwwwww')
     setArrivalMessage({ userId, message });
   };
 
@@ -61,6 +59,7 @@ const ChatDisplay = ({
         }
       );
       setReceivedUsersMessages(response.data);
+      setLoading(false)
     } catch (error) {
       console.log(error);
     }

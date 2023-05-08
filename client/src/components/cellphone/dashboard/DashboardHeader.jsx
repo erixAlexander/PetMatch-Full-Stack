@@ -24,22 +24,28 @@ const DashboardHeader = ({ user, Image }) => {
   };
   return (
     <div className="small-dashboard-header">
-      <FontAwesomeIcon
-        title="sign-out"
-        onClick={handleLogout}
-        className="sign-out"
-        icon={faSignOut}
-      />
-      <p className="petmatch">PetMtch</p>
-      <div className="small-circle">
-        <Link to={"/profile"}>
-          <Image
-            cloudName="dhttotcxc"
-            publicId={user.images[0]?.id}
-            width="60"
-            crop="scale"
-          />
-        </Link>
+      <div className="header-division">
+        <FontAwesomeIcon
+          title="sign-out"
+          onClick={handleLogout}
+          className="sign-out"
+          icon={faSignOut}
+        />
+      </div>
+      <div className="header-division">
+        <p className="petmatch">PetMtch</p>
+      </div>
+      <div className="header-division">
+        <div className="small-circle">
+          <Link to={"/profile"}>
+            <Image
+              cloudName="dhttotcxc"
+              publicId={user.images[0]?.id}
+              width="60"
+              crop="scale"
+            />
+          </Link>
+        </div>
       </div>
     </div>
   );

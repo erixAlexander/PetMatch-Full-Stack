@@ -4,7 +4,7 @@ import { faEnvelope } from "@fortawesome/free-solid-svg-icons";
 import { Image } from "cloudinary-react";
 
 const ChatListMessages = ({
-  finalOrderedMessages,
+  latestReceivedMessages,
   setClickedUser,
   readMessage,
   setSocketNotification,
@@ -15,10 +15,10 @@ const ChatListMessages = ({
 }) => {
   return (
     <>
-      {!finalOrderedMessages.length ? (
-        <p>No Messages yet</p>
+      {!latestReceivedMessages.length ? (
+        <p>Let's make some new friends</p>
       ) : (
-        finalOrderedMessages?.map((match, index) => {
+        latestReceivedMessages?.map((match, index) => {
           return (
             <div
               onClick={() => {

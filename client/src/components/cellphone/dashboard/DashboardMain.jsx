@@ -121,10 +121,6 @@ const DashboardMain = ({
     updateCurrentIndex(index - 1);
   };
 
-  // const outOfFrame = (name, index) => {
-  //   currentIndexRef.current >= index && childRefs[index].current.restoreCard();
-  // };
-
   const swipe = async (dir) => {
     if (canSwipe && currentIndex < usersToDisplay.length) {
       await childRefs[currentIndex]?.current.swipe(dir);

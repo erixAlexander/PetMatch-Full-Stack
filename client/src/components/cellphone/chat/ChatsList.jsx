@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { useCookies } from "react-cookie";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import useAxiosPrivate from "../../../hooks/useAxiosPrivate";
@@ -22,6 +22,7 @@ const ChatsList = ({
   const [lastMessagesList, setLastMessagesList] = useState([]);
   const axiosPrivate = useAxiosPrivate();
   const userId = cookies.userId;
+  const [latestReceivedMessages, setLatestReceivedMessages] = useState([]);
 
   const getUser = async () => {
     try {
@@ -37,12 +38,12 @@ const ChatsList = ({
     }
   };
 
-  const getMatches = async (userLikedUserIds) => {
+  const getMatches = async (likedUsersIds) => {
     try {
       const response = await axiosPrivate.get(
         `${process.env.REACT_APP_URL}/users`,
         {
-          params: { userIds: JSON.stringify(userLikedUserIds) },
+          params: { userIds: JSON.stringify(likedUsersIds) },
         }
       );
 
@@ -54,6 +55,7 @@ const ChatsList = ({
             ).length > 0
         )
       );
+      setLoading(false);
     } catch (error) {
       console.log(error);
     }
@@ -69,20 +71,6 @@ const ChatsList = ({
       console.log(error);
     }
   };
-
-  useEffect(() => {
-    getUser();
-  }, []);
-
-  useEffect(() => {
-    if (user) {
-      const likedUsers = user?.user_matches;
-      const userLikedUserIds = likedUsers?.map(({ user_id }) => user_id);
-      getMatches(userLikedUserIds);
-    }
-  }, [user]);
-
-  // ----------------------------------------------Getting Last Messages--------------------------------------------
 
   const getSentUsersMessages = async (myUserId, clickedUserId) => {
     try {
@@ -112,12 +100,23 @@ const ChatsList = ({
           },
         }
       );
-      setLoading(false);
       return response.data;
     } catch (error) {
       console.log(error);
     }
   };
+
+  useEffect(() => {
+    getUser();
+  }, []);
+
+  useEffect(() => {
+    if (user) {
+      const likedUsers = user?.user_matches;
+      const likedUsersIds = likedUsers?.map(({ user_id }) => user_id);
+      getMatches(likedUsersIds);
+    }
+  }, [user]);
 
   useEffect(() => {
     matchedProfiles?.forEach(async (match) => {
@@ -127,7 +126,10 @@ const ChatsList = ({
         user.user_id
       );
 
-      if (!sentMssg.length && !receiveMssg.length) return;
+      if (!sentMssg.length && !receiveMssg.length) {
+        // setLastMessagesList([]);
+        return;
+      }
 
       const messages = [];
 
@@ -156,6 +158,7 @@ const ChatsList = ({
       const descendingOrderMessages = messages?.sort((a, b) =>
         a.timestamp.localeCompare(b.timestamp)
       );
+
       setLastMessagesList((prev) => [
         ...prev,
         descendingOrderMessages[descendingOrderMessages.length - 1],
@@ -163,9 +166,8 @@ const ChatsList = ({
     });
   }, [matchedProfiles]);
 
-  const [finalOrderedMessages, setFinalOrderedMessages] = useState([]);
   useEffect(() => {
-    setFinalOrderedMessages(
+    setLatestReceivedMessages(
       lastMessagesList
         ?.sort((a, b) => a.timestamp.localeCompare(b.timestamp))
         .reverse()
@@ -173,7 +175,7 @@ const ChatsList = ({
   }, [lastMessagesList]);
 
   useEffect(() => {
-    finalOrderedMessages.forEach((match, index) => {
+    latestReceivedMessages?.forEach((match, index) => {
       setMssgRead((prevState) => ({
         ...prevState,
         [index]: user?.user_matches?.find(
@@ -181,7 +183,7 @@ const ChatsList = ({
         ).read,
       }));
     });
-  }, [finalOrderedMessages]);
+  }, [latestReceivedMessages]);
 
   useEffect(() => {
     setNotificationArray((prev) => {
@@ -208,7 +210,7 @@ const ChatsList = ({
           <div className="small-chat-secondary-container">
             <h2 className="small-chat-title">Chats</h2>
             <ChatListMessages
-              finalOrderedMessages={finalOrderedMessages}
+              latestReceivedMessages={latestReceivedMessages}
               setClickedUser={setClickedUser}
               readMessage={readMessage}
               setSocketNotification={setSocketNotification}

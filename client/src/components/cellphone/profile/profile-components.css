@@ -308,6 +308,7 @@ div.profile-edit-form > form > section > div.onboarding-dropdown-maindiv {
   display: flex;
   align-items: center;
   justify-content: center;
+  border-radius: 5px;
 }
 
 .empty-img-container {
@@ -346,6 +347,12 @@ div.profile-edit-form > form > section > div.onboarding-dropdown-maindiv {
 .relative {
   position: relative;
   min-width: 110px;
+  border-radius: 5px;
+}
+
+
+.relative img{
+  border-radius: 5px;
 }
 
 .overlay-hidden {

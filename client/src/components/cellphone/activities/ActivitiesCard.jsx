@@ -5,6 +5,8 @@ import CardInfo from "./CardInfo";
 import useAxiosPrivate from "../../../hooks/useAxiosPrivate";
 import CardButtons from "./CardButtons";
 import Loading from "../../loading/Loading";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faArrowLeft } from "@fortawesome/free-solid-svg-icons";
 
 const ActivitiesCard = ({
   setShowCard,
@@ -72,7 +74,9 @@ const ActivitiesCard = ({
 
   return (
     <div className="activities-card-container">
-      <h1 onClick={() => setShowCard(false)}>Activity</h1>
+      <h3 onClick={() => setShowCard(false)}>
+        Check out another activity! <FontAwesomeIcon icon={faArrowLeft}/>
+      </h3>
       {loading ? (
         <div className="activities-loading">
           <Loading type={"spin"} color={"#fe3072"} />
@@ -89,7 +93,7 @@ const ActivitiesCard = ({
               >
                 <BackgroundImage activityUser={activityUser} />
 
-                <CardInfo activityUser={activityUser} />
+                <CardInfo activityUser={activityUser} activity={activity} />
               </TinderCard>
             );
           })}

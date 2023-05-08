@@ -1,10 +1,10 @@
-const CardInfo = ({ activityUser }) => {
+const CardInfo = ({ activityUser, activity }) => {
   const { pet_name, gender_identity, address_info } = activityUser;
 
   return (
     <div className="card-info">
       <div className="card-activity">
-        <h2>Activity</h2>
+        <h3>{activity}</h3>
       </div>
       <div className="card-info-name">
         <h1>{pet_name}</h1>
