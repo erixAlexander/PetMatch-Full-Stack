@@ -75,7 +75,7 @@ const AuthModal = ({ setShowModal, isSignUp }) => {
       );
 
       setCookie("userId", response.data.userId, {
-        maxAge: 60 * 60 * 24,
+        maxAge: 60 * 60 * 20,
       });
 
       const success = response.status === 201;

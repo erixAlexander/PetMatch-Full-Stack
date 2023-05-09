@@ -15,8 +15,10 @@ const ChatListMessages = ({
 }) => {
   return (
     <>
-      {!latestReceivedMessages.length ? (
-        <p>Let's make some new friends</p>
+      {latestReceivedMessages[0] == "loading" ? (
+        <p>Loading...</p>
+      ) : !latestReceivedMessages.length ? (
+        <p>No conversations yet... Let's make some Friends!</p>
       ) : (
         latestReceivedMessages?.map((match, index) => {
           return (

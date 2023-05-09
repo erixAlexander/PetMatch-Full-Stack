@@ -17,12 +17,14 @@ const ChatsList = ({
   const [loading, setLoading] = useState(true);
   const [user, setUser] = useState(null);
   const [mssgRead, setMssgRead] = useState({});
-  const [matchedProfiles, setMatchedProfiles] = useState([]);
+  const [matchedProfiles, setMatchedProfiles] = useState(["loading"]);
+  const [lastMessagesList, setLastMessagesList] = useState(["loading"]);
+  const [latestReceivedMessages, setLatestReceivedMessages] = useState([
+    "loading",
+  ]);
   const [cookies] = useCookies(null);
-  const [lastMessagesList, setLastMessagesList] = useState([]);
   const axiosPrivate = useAxiosPrivate();
   const userId = cookies.userId;
-  const [latestReceivedMessages, setLatestReceivedMessages] = useState([]);
 
   const getUser = async () => {
     try {
@@ -55,7 +57,6 @@ const ChatsList = ({
             ).length > 0
         )
       );
-      setLoading(false);
     } catch (error) {
       console.log(error);
     }
@@ -119,60 +120,73 @@ const ChatsList = ({
   }, [user]);
 
   useEffect(() => {
-    matchedProfiles?.forEach(async (match) => {
-      let sentMssg = await getSentUsersMessages(user.user_id, match.user_id);
-      let receiveMssg = await getReceivedUsersMessages(
-        match.user_id,
-        user.user_id
-      );
+    matchedProfiles[0] != "loading" &&
+      lastMessagesList.shift() &&
+      matchedProfiles?.forEach(async (match) => {
+        let sentMssg = await getSentUsersMessages(user.user_id, match.user_id);
+        let receiveMssg = await getReceivedUsersMessages(
+          match.user_id,
+          user.user_id
+        );
 
-      if (!sentMssg.length && !receiveMssg.length) {
-        // setLastMessagesList([]);
-        return;
-      }
+        if (!sentMssg.length && !receiveMssg.length) {
+          setLastMessagesList((prev) => [...prev, "empty"]);
+          return;
+        }
 
-      const messages = [];
+        const messages = [];
 
-      sentMssg?.forEach((message) => {
-        const formattedsentMessage = {};
-        formattedsentMessage["name"] = match?.pet_name;
-        formattedsentMessage["user_id"] = match?.user_id;
-        formattedsentMessage["img"] = match?.images[0];
-        formattedsentMessage["message"] = message?.message;
-        formattedsentMessage["timestamp"] = message?.timestamp;
-        formattedsentMessage["dir"] = "out";
-        messages.push(formattedsentMessage);
+        sentMssg?.forEach((message) => {
+          const formattedsentMessage = {};
+          formattedsentMessage["name"] = match?.pet_name;
+          formattedsentMessage["user_id"] = match?.user_id;
+          formattedsentMessage["img"] = match?.images[0];
+          formattedsentMessage["message"] = message?.message;
+          formattedsentMessage["timestamp"] = message?.timestamp;
+          formattedsentMessage["dir"] = "out";
+          messages.push(formattedsentMessage);
+        });
+
+        receiveMssg?.forEach((message) => {
+          const formattedsentMessage = {};
+          formattedsentMessage["name"] = match?.pet_name;
+          formattedsentMessage["user_id"] = match?.user_id;
+          formattedsentMessage["img"] = match?.images[0];
+          formattedsentMessage["message"] = message?.message;
+          formattedsentMessage["timestamp"] = message?.timestamp;
+          formattedsentMessage["dir"] = "in";
+          messages.push(formattedsentMessage);
+        });
+
+        const descendingOrderMessages = messages?.sort((a, b) =>
+          a.timestamp.localeCompare(b.timestamp)
+        );
+
+        setLastMessagesList((prev) => [
+          ...prev,
+          descendingOrderMessages[descendingOrderMessages.length - 1],
+        ]);
       });
 
-      receiveMssg?.forEach((message) => {
-        const formattedsentMessage = {};
-        formattedsentMessage["name"] = match?.pet_name;
-        formattedsentMessage["user_id"] = match?.user_id;
-        formattedsentMessage["img"] = match?.images[0];
-        formattedsentMessage["message"] = message?.message;
-        formattedsentMessage["timestamp"] = message?.timestamp;
-        formattedsentMessage["dir"] = "in";
-        messages.push(formattedsentMessage);
-      });
-
-      const descendingOrderMessages = messages?.sort((a, b) =>
-        a.timestamp.localeCompare(b.timestamp)
-      );
-
-      setLastMessagesList((prev) => [
-        ...prev,
-        descendingOrderMessages[descendingOrderMessages.length - 1],
-      ]);
-    });
+    matchedProfiles[0] != "loading" &&
+      !matchedProfiles.length &&
+      setLastMessagesList([]);
   }, [matchedProfiles]);
 
   useEffect(() => {
-    setLatestReceivedMessages(
-      lastMessagesList
-        ?.sort((a, b) => a.timestamp.localeCompare(b.timestamp))
-        .reverse()
-    );
+    if (lastMessagesList[0] != "loading") {
+      const test = lastMessagesList.filter(e=> e != 'empty')
+      setLatestReceivedMessages(
+        test
+          ?.sort((a, b) => a.timestamp.localeCompare(b.timestamp))
+          .reverse()
+      );
+    }
   }, [lastMessagesList]);
+
+  useEffect(() => {
+    latestReceivedMessages[0] != "loading" && setLoading(false);
+  }, [latestReceivedMessages]);
 
   useEffect(() => {
     latestReceivedMessages?.forEach((match, index) => {

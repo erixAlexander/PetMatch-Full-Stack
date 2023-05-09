@@ -60,7 +60,11 @@ const Dashboard = () => {
   };
 
   useEffect(() => {
-    setScreenSize(size.width);
+    if (!userId) {
+      window.location.replace('/')
+    } else {
+      setScreenSize(size.width);
+    }
   }, [size]);
 
   return (
