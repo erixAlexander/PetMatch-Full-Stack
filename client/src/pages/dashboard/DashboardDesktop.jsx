@@ -113,28 +113,23 @@ const DashboardDesktop = ({
   const canGoBack = currentIndex < usersToDisplay.length - 1;
   const canSwipe = currentIndex >= 0;
 
-  const outOfFrame = (index) => {
-    currentIndexRef.current >= index && childRefs[index].current.restoreCard();
-  };
-
   const swipe = async (dir) => {
     if (canSwipe && currentIndex < usersToDisplay.length) {
       await childRefs[currentIndex]?.current.swipe(dir);
     }
   };
-  
-  const swiped = (direction, swipedUserId, index) => {
+
+  const swiped = (direction, swipedUserId, index, name) => {
     if (direction === "right") {
       updateMatches(userId, swipedUserId);
     }
-    updateCurrentIndex(index - 1);
+    updateCurrentIndex((prev) => prev - 1);
   };
 
   const goBack = async () => {
     if (!canGoBack) return;
-    const newIndex = currentIndex + 1;
-    updateCurrentIndex(newIndex);
-    await childRefs[newIndex].current.restoreCard();
+    updateCurrentIndex(currentIndex + 1);
+    await childRefs[currentIndex + 1].current.restoreCard();
   };
 
   const [activeSidebar, setActiveSidebar] = useState(false);
@@ -165,8 +160,14 @@ const DashboardDesktop = ({
                       ref={childRefs[index]}
                       className="swipe"
                       key={character.user_id}
-                      onSwipe={(dir) => swiped(dir, character.user_id, index)}
-                      onCardLeftScreen={() => outOfFrame(index)}
+                      onSwipe={(dir) =>
+                        swiped(
+                          dir,
+                          character.user_id,
+                          index,
+                          character.pet_name
+                        )
+                      }
                     >
                       <div
                         style={{

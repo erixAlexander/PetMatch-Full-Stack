@@ -14,7 +14,7 @@ const App = () => {
         {<Route path="/dashboard" element={<Dashboard />} />}
         {<Route path="/onboarding" element={<OnBoarding />} />}
         {<Route path="/profile" element={<Profile />} />}
-        </Route>
+      </Route>
     </Routes>
   );
 };

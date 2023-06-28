@@ -64,6 +64,7 @@ const OnboardingForm = ({ setLoading, formData, navigate, setFormData }) => {
   };
 
   const handleInputFileChange = (e) => {
+
     if (inputFile) {
       setInputFile([]);
     }
@@ -97,6 +98,7 @@ const OnboardingForm = ({ setLoading, formData, navigate, setFormData }) => {
       const reader = new FileReader();
       reader.readAsDataURL(file);
       reader.onloadend = () => {
+        console.log(reader)
         setInputFile((prev) => [...prev, reader.result]);
       };
     });

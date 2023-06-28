@@ -86,8 +86,6 @@ const DashboardMain = ({
     );
 
     checkDistanceAndShuffle(usersNotMatched);
-
-    setCurrentIndex(usersToDisplay?.length - 1);
   }, [genderedUsers]);
 
   useEffect(() => {
@@ -115,10 +113,9 @@ const DashboardMain = ({
   const swiped = (direction, swipedUserId, index) => {
     if (direction === "right") {
       updateMatches(userId, swipedUserId);
-      updateCurrentIndex(index - 1);
     }
     setLastDirection(direction);
-    updateCurrentIndex(index - 1);
+    updateCurrentIndex((prev) => prev - 1);
   };
 
   const swipe = async (dir) => {

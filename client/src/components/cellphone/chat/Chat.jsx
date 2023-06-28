@@ -38,6 +38,7 @@ const Chat = ({ user }) => {
     };
   }, [socket]);
 
+  
   return (
     <>
       {!clickedUser ? (

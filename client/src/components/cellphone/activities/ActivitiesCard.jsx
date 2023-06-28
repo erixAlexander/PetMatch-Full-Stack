@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo, useState, createRef } from "react";
 import TinderCard from "react-tinder-card";
 import BackgroundImage from "./BackgroundImage";
 import CardInfo from "./CardInfo";
@@ -60,7 +60,7 @@ const ActivitiesCard = ({
     () =>
       Array(activityUsers?.length)
         .fill(0)
-        .map((i) => React.createRef()),
+        .map((i) => createRef()),
     [activityUsers]
   );
 
@@ -70,12 +70,11 @@ const ActivitiesCard = ({
     }
     setCurrentIndex(index - 1);
   };
-  console.log(activityUsers);
 
   return (
     <div className="activities-card-container">
       <h3 onClick={() => setShowCard(false)}>
-        Check out another activity! <FontAwesomeIcon icon={faArrowLeft}/>
+        Check out another activity! <FontAwesomeIcon icon={faArrowLeft} />
       </h3>
       {loading ? (
         <div className="activities-loading">

@@ -16,6 +16,8 @@ const AuthModal = ({ setShowModal, isSignUp }) => {
   const PWD_REGEX = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%.]).{8,24}$/;
 
   const emailRef = useRef();
+  let navigate = useNavigate();
+
   const [email, setEmail] = useState("");
   const [validEmail, setValidEmail] = useState(false);
 
@@ -26,8 +28,6 @@ const AuthModal = ({ setShowModal, isSignUp }) => {
   const [validMatch, setValidMatch] = useState(false);
 
   const [error, setError] = useState("");
-
-  let navigate = useNavigate();
 
   const [cookies, setCookie, removeCookie] = useCookies("user");
 
@@ -115,7 +115,7 @@ const AuthModal = ({ setShowModal, isSignUp }) => {
           ref={emailRef}
           placeholder="email"
           autoComplete="off"
-          required="{true}"
+          required={true}
           onChange={(e) => setEmail(e.target.value)}
         />
         <p className={email && !validEmail ? "instructions" : "hide"}>
@@ -137,7 +137,7 @@ const AuthModal = ({ setShowModal, isSignUp }) => {
           id="password"
           name="password"
           placeholder="password"
-          required="{true}"
+          required={true}
           onChange={(e) => setPassword(e.target.value)}
           autoComplete="off"
         />
@@ -160,7 +160,7 @@ const AuthModal = ({ setShowModal, isSignUp }) => {
               id="password-check"
               name="password-check"
               placeholder="confirm password"
-              required="{true}"
+              required={true}
               onChange={(e) => setConfirmedPassword(e.target.value)}
               autoComplete="off"
             />
